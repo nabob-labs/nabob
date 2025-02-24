@@ -1,0 +1,18 @@
+[package]
+name = "nabob-ledger"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-crypto = { workspace = true }
+nabob-types = { workspace = true }
+hex = { workspace = true }
+ledger-apdu = "0.10.0"
+ledger-transport-hid = "0.10.0"
+thiserror = { workspace = true }

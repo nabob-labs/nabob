@@ -1,0 +1,9 @@
+[package]
+name = "Examples"
+version = "0.0.0"
+
+[addresses]
+hello_blockchain = "_"
+
+[dependencies]
+NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }

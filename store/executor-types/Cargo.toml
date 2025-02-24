@@ -1,0 +1,38 @@
+[package]
+name = "nabob-executor-types"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-drop-helper = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-scratchpad = { workspace = true }
+nabob-secure-net = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+criterion = { workspace = true }
+derive_more = { workspace = true }
+itertools = { workspace = true }
+once_cell = { workspace = true }
+ouroboros = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+nabob-types = { workspace = true, features = ["fuzzing"] }
+
+[features]
+default = []
+fuzzing = ["nabob-crypto/fuzzing", "nabob-types/fuzzing"]
+bench = []

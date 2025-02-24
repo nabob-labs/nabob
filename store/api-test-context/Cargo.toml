@@ -1,0 +1,42 @@
+[package]
+name = "nabob-api-test-context"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-api = { workspace = true }
+nabob-api-types = { workspace = true }
+nabob-cached-packages = { workspace = true }
+nabob-config = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-db = { workspace = true, features = ["fuzzing"] }
+nabob-executor = { workspace = true }
+nabob-executor-types = { workspace = true }
+nabob-framework = { workspace = true }
+nabob-genesis = { workspace = true }
+nabob-indexer-grpc-table-info = { workspace = true }
+nabob-mempool = { workspace = true, features = ["fuzzing"] }
+nabob-mempool-notify = { workspace = true }
+nabob-sdk = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-temppath = { workspace = true }
+nabob-types = { workspace = true }
+nabob-vm = { workspace = true }
+nabob-vm-logging = { workspace = true }
+nabob-vm-validator = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+goldenfile = { workspace = true }
+hyper = { workspace = true }
+rand = { workspace = true }
+regex = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+warp = { workspace = true }
+warp-reverse-proxy = { workspace = true }

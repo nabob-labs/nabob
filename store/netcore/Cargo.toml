@@ -1,0 +1,31 @@
+[package]
+name = "nabob-netcore"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-memsocket = { workspace = true }
+nabob-proxy = { workspace = true }
+nabob-types = { workspace = true }
+bytes = { workspace = true }
+futures = { workspace = true }
+pin-project = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+nabob-memsocket = { workspace = true }
+nabob-types = { workspace = true, features = ["fuzzing"] }
+
+[features]
+default = []
+fuzzing = ["nabob-memsocket/fuzzing", "nabob-types/fuzzing"]
+testing = ["nabob-memsocket/testing"]

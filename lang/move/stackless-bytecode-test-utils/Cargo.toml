@@ -1,0 +1,21 @@
+[package]
+name = "move-stackless-bytecode-test-utils"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+codespan-reporting = { workspace = true, features = ["serde", "serialization"] }
+move-command-line-common = { workspace = true }
+move-compiler = { workspace = true }
+move-compiler-v2 = { workspace = true }
+move-model = { workspace = true }
+move-prover-test-utils = { workspace = true }
+move-stackless-bytecode = { workspace = true }
+move-stdlib = { workspace = true }

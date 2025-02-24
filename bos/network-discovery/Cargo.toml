@@ -1,0 +1,36 @@
+[package]
+name = "nabob-network-discovery"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-channels = { workspace = true }
+nabob-config = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-event-notify = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-network = { workspace = true }
+nabob-rest-cli = { workspace = true }
+nabob-short-hex-str = { workspace = true }
+nabob-time-svc = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+futures = { workspace = true }
+once_cell = { workspace = true }
+serde_yaml = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+nabob-config = { workspace = true, features = ["testing"] }
+nabob-netcore = { workspace = true, features = ["fuzzing"] }
+nabob-temppath = { workspace = true }
+rand = { workspace = true }

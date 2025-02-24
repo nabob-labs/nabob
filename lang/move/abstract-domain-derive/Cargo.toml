@@ -1,0 +1,21 @@
+[package]
+name = "move-abstract-domain-derive"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { workspace = true }
+quote = { workspace = true }
+proc-macro2 = { workspace = true }
+
+[dev-dependencies]
+move-stackless-bytecode = { workspace = true }

@@ -1,0 +1,41 @@
+[package]
+name = "nabob-indexer-grpc-table-info"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-api = { workspace = true }
+nabob-api-types = { workspace = true }
+nabob-config = { workspace = true }
+nabob-db-indexer  = { workspace = true }
+nabob-indexer-grpc-fullnode = { workspace = true }
+nabob-indexer-grpc-utils = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-mempool = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-runtimes = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+flate2 = { workspace = true }
+futures = { workspace = true }
+google-cloud-storage = { workspace = true }
+hyper = { workspace = true }
+itertools = { workspace = true }
+once_cell = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tar = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+tokio-util = { workspace = true }
+
+[dev-dependencies]
+rocksdb = { workspace = true }
+tempfile = { workspace = true }

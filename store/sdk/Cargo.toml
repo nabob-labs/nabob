@@ -1,0 +1,40 @@
+[package]
+name = "nabob-sdk"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-cached-packages = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-global-constants = { workspace = true }
+nabob-ledger = { workspace = true }
+nabob-rest-cli = { workspace = true }
+nabob-types = { workspace = true }
+base64 = { workspace = true }
+bcs = { workspace = true }
+ed25519-dalek-bip32 = { workspace = true }
+hex = { workspace = true }
+lazy_static = "1.4.0"
+move-core-types = { workspace = true }
+rand = { workspace = true }
+rand_core = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tiny-bip39 = { workspace = true }
+
+[dev-dependencies]
+once_cell = { workspace = true }
+rand = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }
+
+[package.metadata.cargo-machete]
+ignored = ["tiny-bip39"]

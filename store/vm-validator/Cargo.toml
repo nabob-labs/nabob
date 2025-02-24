@@ -1,0 +1,42 @@
+[package]
+name = "nabob-vm-validator"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+nabob-vm = { workspace = true }
+nabob-vm-environment = { workspace = true }
+nabob-vm-logging = { workspace = true }
+fail = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-vm-runtime = { workspace = true }
+move-vm-types = { workspace = true }
+rand = { workspace = true }
+
+[dev-dependencies]
+nabob-cached-packages = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-db = { workspace = true }
+nabob-executor-test-helpers = { workspace = true }
+nabob-gas-schedule = { workspace = true, features = ["testing"] }
+nabob-temppath = { workspace = true }
+nabob-types = { workspace = true, features = ["testing"] }
+nabob-vm-genesis = { workspace = true }
+move-vm-types = { workspace = true, features = ["testing"] }
+rand = { workspace = true }
+
+[features]
+default = []
+failpoints = ["fail/failpoints"]
+fuzzing = ["nabob-types/fuzzing", "nabob-crypto/fuzzing", "nabob-db/fuzzing"]

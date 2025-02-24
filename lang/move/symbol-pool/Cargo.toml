@@ -1,0 +1,20 @@
+[package]
+name = "move-symbol-pool"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+once_cell = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+
+[dev-dependencies]
+serde_json = { workspace = true }
+
+[features]
+default = []

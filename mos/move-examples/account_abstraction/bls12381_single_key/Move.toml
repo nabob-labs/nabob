@@ -1,0 +1,10 @@
+[package]
+name = "AA"
+version = "0.0.0"
+
+[addresses]
+aa = "_"
+
+[dependencies]
+NabobFramework = { local = "../../../framework/nabob-framework" }
+NabobStdlib = { local = "../../../framework/nabob-stdlib" }

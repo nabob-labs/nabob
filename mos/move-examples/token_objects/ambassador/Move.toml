@@ -1,0 +1,11 @@
+[package]
+name = 'ambassador'
+version = '1.0.0'
+
+# do not change to "_", concrete address needed for module-publish testing framework
+[addresses]
+ambassador = "0xCAFE"
+
+[dependencies]
+NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }
+NabobTokenObjects = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-token-objects", rev = "main" }

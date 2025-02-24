@@ -1,0 +1,40 @@
+[package]
+name = "nabob-monitor-cli"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-channels = { workspace = true }
+nabob-config = { workspace = true }
+nabob-id-generator = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-network = { workspace = true }
+nabob-monitor-types = { workspace = true }
+nabob-time-svc = { workspace = true }
+nabob-types = { workspace = true }
+enum_dispatch = { workspace = true }
+futures = { workspace = true }
+once_cell = { workspace = true }
+rand = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+nabob-build-info = { workspace = true }
+nabob-config = { workspace = true }
+nabob-netcore = { workspace = true }
+nabob-network = { workspace = true, features = ["fuzzing"] }
+nabob-monitor-svc = { workspace = true }
+bcs = { workspace = true }
+maplit = { workspace = true }
+tokio-stream = { workspace = true }

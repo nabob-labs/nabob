@@ -1,0 +1,54 @@
+[package]
+name = "move-compiler-v2"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+move-abstract-domain-derive = { workspace = true }
+anyhow = { workspace = true }
+bcs = { workspace = true }
+clap = { workspace = true, features = ["derive", "env"] }
+codespan = { workspace = true }
+codespan-reporting = { workspace = true, features = ["serde", "serialization"] }
+ethnum = { workspace = true }
+flexi_logger = { workspace = true }
+im = { workspace = true }
+itertools = { workspace = true }
+log = { workspace = true, features = ["serde"] }
+move-binary-format = { workspace = true }
+move-borrow-graph = { workspace = true }
+move-bytecode-source-map = { workspace = true }
+move-bytecode-verifier = { workspace = true }
+move-command-line-common = { workspace = true }
+move-compiler = { workspace = true }
+move-core-types = { workspace = true }
+move-disassembler = { workspace = true }
+move-ir-types = { workspace = true }
+move-model = { workspace = true }
+move-stackless-bytecode = { workspace = true }
+move-symbol-pool = { workspace = true }
+num = { workspace = true }
+once_cell = { workspace = true }
+petgraph = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+datatest-stable = { workspace = true }
+move-command-line-common = { workspace = true }
+move-ir-types = { workspace = true }
+move-prover-test-utils = { workspace = true }
+move-stdlib = { workspace = true }
+walkdir = { workspace = true }
+
+[lib]
+doctest = false
+
+[package.metadata.cargo-machete]
+ignored = ["strum"]

@@ -1,0 +1,61 @@
+[package]
+name = "nabob-state-svc"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-config = { workspace = true }
+nabob-consensus-notify = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-data-cli = { workspace = true }
+nabob-data-stream-svc = { workspace = true }
+nabob-event-notify = { workspace = true }
+nabob-executor-types = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-mempool-notify = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-runtimes = { workspace = true }
+nabob-schemadb = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-storage-notify = { workspace = true }
+nabob-time-svc = { workspace = true }
+nabob-types = { workspace = true }
+async-trait = { workspace = true }
+bcs = { workspace = true }
+futures = { workspace = true }
+once_cell = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+nabob-channels = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-db = { workspace = true }
+nabob-executor = { workspace = true }
+nabob-executor-test-helpers = { workspace = true }
+nabob-genesis = { workspace = true, features = ["testing"] }
+nabob-network = { workspace = true }
+nabob-storage-cli = { workspace = true }
+nabob-storage-types = { workspace = true }
+nabob-temppath = { workspace = true }
+nabob-time-svc = { workspace = true, features = ["async", "testing"] }
+nabob-vm = { workspace = true }
+nabob-vm-genesis = { workspace = true }
+async-trait = { workspace = true }
+bcs = { workspace = true }
+claims = { workspace = true }
+mockall = { workspace = true }
+move-core-types = { workspace = true }
+ntest = { workspace = true }
+rand = { workspace = true }

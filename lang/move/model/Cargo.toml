@@ -1,0 +1,36 @@
+[package]
+name = "move-model"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+codespan = { workspace = true }
+codespan-reporting = { workspace = true }
+either = { workspace = true }
+internment = { workspace = true, features = ["arc"] }
+itertools = { workspace = true }
+log = { workspace = true }
+move-binary-format = { workspace = true }
+move-bytecode-source-map = { workspace = true }
+move-command-line-common = { workspace = true }
+move-compiler = { workspace = true }
+move-core-types = { workspace = true }
+move-disassembler = { workspace = true }
+move-ir-types = { workspace = true }
+move-symbol-pool = { workspace = true }
+num = { workspace = true }
+num-traits = { workspace = true }
+once_cell = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+
+[dev-dependencies]
+datatest-stable = { workspace = true }
+move-prover-test-utils = { workspace = true }

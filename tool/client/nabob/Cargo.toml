@@ -1,0 +1,120 @@
+[package]
+name = "nabob"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-api-types = { workspace = true }
+nabob-backup-cli = { workspace = true }
+nabob-bitvec = { workspace = true }
+nabob-build-info = { workspace = true }
+nabob-cached-packages = { workspace = true }
+nabob-cli-common = { workspace = true }
+nabob-config = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-faucet-core = { workspace = true }
+nabob-framework = { workspace = true }
+nabob-gas-profiling = { workspace = true }
+nabob-gas-schedule = { workspace = true }
+nabob-genesis = { workspace = true }
+nabob-github-cli = { workspace = true }
+nabob-global-constants = { workspace = true }
+nabob-indexer-grpc-server-framework = { workspace = true }
+nabob-indexer-grpc-utils = { workspace = true }
+nabob-keygen = { workspace = true }
+nabob-ledger = { workspace = true }
+nabob-localnet = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-move-debugger = { workspace = true }
+nabob-network-checker = { workspace = true }
+nabob-node = { workspace = true }
+nabob-protos = { workspace = true }
+nabob-rest-cli = { workspace = true }
+nabob-sdk = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-telemetry-cli = { workspace = true }
+nabob-temppath = { workspace = true }
+nabob-types = { workspace = true }
+nabob-vm = { workspace = true, features = ["testing"] }
+nabob-vm-environment = { workspace = true }
+nabob-vm-genesis = { workspace = true }
+nabob-vm-logging = { workspace = true }
+nabob-vm-types = { workspace = true }
+nabob-workspace-svc = { workspace = true }
+async-trait = { workspace = true }
+base64 = { workspace = true }
+bcs = { workspace = true }
+bollard = { workspace = true }
+chrono = { workspace = true }
+clap = { workspace = true, features = ["env", "unstable-styles", "wrap_help"] }
+clap_complete = { workspace = true }
+colored = { workspace = true }
+dashmap = { workspace = true }
+diesel = { workspace = true, features = [
+    "postgres_backend",
+] }
+diesel-async = { workspace = true }
+dirs = { workspace = true }
+futures = { workspace = true }
+hex = { workspace = true }
+indoc = { workspace = true }
+itertools = { workspace = true }
+maplit = { workspace = true }
+move-binary-format = { workspace = true }
+move-bytecode-source-map = { workspace = true }
+move-cli = { workspace = true }
+move-command-line-common = { workspace = true }
+move-compiler = { workspace = true }
+move-compiler-v2 = { workspace = true }
+move-core-types = { workspace = true }
+move-coverage = { workspace = true }
+move-disassembler = { workspace = true }
+move-ir-types = { workspace = true }
+move-linter = { workspace = true }
+move-model = { workspace = true }
+move-package = { workspace = true }
+move-prover-boogie-backend = { workspace = true }
+move-symbol-pool = { workspace = true }
+move-unit-test = { workspace = true, features = ["debugging"] }
+move-vm-runtime = { workspace = true, features = ["testing"] }
+open = { workspace = true }
+pathsearch = { workspace = true }
+poem = { workspace = true }
+processor = { workspace = true }
+rand = { workspace = true }
+regex = { workspace = true }
+reqwest = { workspace = true }
+self_update = { git = "https://github.com/banool/self_update.git", rev = "8306158ad0fd5b9d4766a3c6bf967e7ef0ea5c4b", features = ["archive-zip", "compression-zip-deflate"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+server-framework = { workspace = true }
+set_env = { workspace = true }
+tempfile = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+toml = { workspace = true }
+tonic = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+url = { workspace = true }
+
+[target.'cfg(unix)'.dependencies]
+jemallocator = { workspace = true }
+
+[features]
+default = []
+fuzzing = []
+no-upload-proposal = []
+indexer = ["nabob-node/indexer"]
+cli-framework-test-move = []
+
+[build-dependencies]
+shadow-rs = { workspace = true }

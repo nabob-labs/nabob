@@ -1,0 +1,25 @@
+[package]
+name = "nabob-accumulator"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-types = { workspace = true }
+proptest = { workspace = true, optional = true }
+
+[dev-dependencies]
+nabob-crypto = { workspace = true, features = ["fuzzing"] }
+proptest = { workspace = true }
+rand = { workspace = true }
+
+[features]
+default = []
+fuzzing = ["proptest", "nabob-crypto/fuzzing", "nabob-types/fuzzing"]

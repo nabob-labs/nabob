@@ -1,0 +1,27 @@
+[package]
+name = "nabob-executor-test-helpers"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-cached-packages = { workspace = true }
+nabob-config = { workspace = true }
+nabob-consensus-types = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-db = { workspace = true, features = ["fuzzing"] }
+nabob-executor = { workspace = true }
+nabob-executor-types = { workspace = true }
+nabob-sdk = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-temppath = { workspace = true }
+nabob-types = { workspace = true }
+nabob-vm = { workspace = true }
+nabob-vm-genesis = { workspace = true }
+rand = { workspace = true }

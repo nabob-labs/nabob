@@ -1,0 +1,29 @@
+[package]
+name = "nabob-time-svc"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-infallible = { workspace = true }
+enum_dispatch = { workspace = true }
+futures = { workspace = true, optional = true }
+pin-project = { workspace = true, optional = true }
+thiserror = { workspace = true }
+tokio = { workspace = true, optional = true }
+
+[dev-dependencies]
+futures = { workspace = true }
+pin-project = { workspace = true }
+tokio = { workspace = true }
+tokio-test = { workspace = true }
+
+[features]
+default = []
+async = ["futures", "pin-project", "tokio"]
+testing = ["async"]

@@ -1,0 +1,18 @@
+[package]
+name = "nabob-abstract-gas-usage"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-gas-algebra = { workspace = true }
+nabob-gas-meter = { workspace = true }
+nabob-gas-schedule = { workspace = true }
+nabob-vm-types = { workspace = true }
+move-binary-format = { workspace = true }

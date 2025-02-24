@@ -1,0 +1,27 @@
+[package]
+name = "nabob-transaction-filter"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-protos = { workspace = true }
+derivative = { workspace = true }
+derive_builder = { workspace = true }
+memchr = { workspace = true }
+once_cell = { workspace = true }
+prost = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+# we only decompress the fixture protos in test
+lz4 = { workspace = true }

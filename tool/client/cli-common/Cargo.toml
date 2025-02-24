@@ -1,0 +1,15 @@
+[package]
+name = "nabob-cli-common"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anstyle = { workspace = true }
+clap = { workspace = true, features = ["unstable-styles"] }
+clap_complete = { workspace = true }

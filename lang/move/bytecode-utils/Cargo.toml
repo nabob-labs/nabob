@@ -1,0 +1,17 @@
+[package]
+name = "move-bytecode-utils"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+petgraph = { workspace = true }
+serde-reflection = { workspace = true }

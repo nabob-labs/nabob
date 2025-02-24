@@ -1,0 +1,41 @@
+[package]
+name = "integration-tests"
+description = "Indexer GRPC processor integration tests."
+version = "1.0.0"
+
+# Workspace inherited keys
+authors = ["Nabob Labs <opensource@naboblabs.com>"]
+edition = "2021"
+homepage = "https://naboblabs.com"
+license = "Apache-2.0"
+publish = false
+repository = "https://github.com/nabob-labs/nabob"
+rust-version = { workspace = true }
+
+[dependencies]
+ahash = { workspace = true }
+anyhow = { workspace = true }
+nabob-indexer-processor-sdk = { workspace = true }
+nabob-indexer-test-transactions  = { workspace = true }
+nabob-indexer-testing-framework = { workspace = true }
+nabob-protos = { workspace = true }
+assert-json-diff = { workspace = true }
+bigdecimal = { workspace = true }
+chrono = { workspace = true }
+diesel = { workspace = true }
+field_count = { workspace = true }
+processor = { workspace = true }
+sdk-processor = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+testcontainers = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+ahash = { workspace = true }
+nabob-indexer-processor-sdk = { workspace = true }
+futures = { workspace = true }
+sdk-processor = { workspace = true }
+tempfile = { workspace = true }
+tonic = { workspace = true }
+url = { workspace = true }

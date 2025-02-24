@@ -1,0 +1,47 @@
+[package]
+name = "nabob-telemetry-cli"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-api = { workspace = true }
+nabob-config = { workspace = true }
+nabob-consensus = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-db = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-mempool = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-network = { workspace = true }
+nabob-node-resource-metrics = { workspace = true }
+nabob-runtimes = { workspace = true }
+nabob-state-svc = { workspace = true }
+nabob-telemetry-svc = { workspace = true }
+nabob-types = { workspace = true }
+flate2 = { workspace = true }
+futures = { workspace = true }
+once_cell = { workspace = true }
+prometheus = { workspace = true }
+rand = { workspace = true }
+rand_core = { workspace = true }
+reqwest = { workspace = true }
+reqwest-middleware = { workspace = true }
+reqwest-retry = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sysinfo = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+url = { workspace = true }
+uuid = { workspace = true }
+
+[dev-dependencies]
+httpmock = { workspace = true }

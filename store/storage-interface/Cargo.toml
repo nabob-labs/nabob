@@ -1,0 +1,42 @@
+[package]
+name = "nabob-storage-interface"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-layered-map = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-scratchpad = { workspace = true }
+nabob-secure-net = { workspace = true }
+nabob-types = { workspace = true }
+arr_macro = { workspace = true }
+bcs = { workspace = true }
+dashmap = { workspace = true }
+derive_more = { workspace = true }
+itertools = { workspace = true }
+once_cell = { workspace = true }
+parking_lot = { workspace = true }
+proptest = { workspace = true }
+proptest-derive = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+nabob-types = { workspace = true, features = ["fuzzing"] }
+
+[features]
+default = []
+fuzzing = ["nabob-types/fuzzing"]
+
+[package.metadata.cargo-machete]
+ignored = ["proptest"]

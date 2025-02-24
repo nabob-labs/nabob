@@ -1,0 +1,57 @@
+[package]
+name = "nabob-executor"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-block-executor = { workspace = true }
+nabob-consensus-types = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-drop-helper = { workspace = true }
+nabob-executor-svc = { workspace = true }
+nabob-executor-types = { workspace = true }
+nabob-runtimes-extension = { workspace = true }
+nabob-indexer-grpc-table-info = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-sdk = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+nabob-vm = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+fail = { workspace = true }
+itertools = { workspace = true }
+move-core-types = { workspace = true }
+once_cell = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+
+[dev-dependencies]
+nabob-cached-packages = { workspace = true }
+nabob-config = { workspace = true }
+nabob-db = { workspace = true }
+nabob-db-indexer = { workspace = true, features = ["fuzzing"] }
+nabob-executor-test-helpers = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-temppath = { workspace = true }
+nabob-types = { workspace = true, features = ["testing"] }
+nabob-vm-genesis = { workspace = true }
+arr_macro = { workspace = true }
+criterion = { workspace = true }
+proptest = { workspace = true }
+rand = { workspace = true }
+
+[features]
+default = []
+fuzzing = ["nabob-consensus-types/fuzzing", "nabob-crypto/fuzzing", "nabob-types/fuzzing", "nabob-storage-interface/fuzzing"]
+failpoints = ["fail/failpoints", "nabob-vm/failpoints"]
+consensus-only-perf-test = []

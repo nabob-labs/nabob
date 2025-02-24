@@ -1,0 +1,23 @@
+[package]
+name = "move-bytecode-viewer"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+crossterm = { workspace = true }
+move-binary-format = { workspace = true }
+move-bytecode-source-map = { workspace = true }
+move-disassembler = { workspace = true }
+regex = { workspace = true }
+tui = { workspace = true }
+
+[features]
+default = []

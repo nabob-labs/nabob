@@ -1,0 +1,47 @@
+[package]
+name = "nabob-dkg"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-crypto-derive = { workspace = true }
+nabob-runtimes = { workspace = true }
+bcs =  { workspace = true }
+blst = { workspace = true }
+blstrs = { workspace = true }
+criterion = { workspace = true }
+ff = { workspace = true }
+group = { workspace = true }
+hex = { workspace = true }
+merlin = { workspace = true }
+more-asserts = { workspace = true }
+num-bigint = { workspace = true }
+num-integer = { workspace = true }
+num-traits = { workspace = true }
+once_cell = { workspace = true }
+pairing = { workspace = true }
+rand = { workspace = true }
+rand_core = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+sha3 = { workspace = true }
+static_assertions = { workspace = true }
+
+[dev-dependencies]
+num_cpus = { workspace = true }
+
+[features]
+assert-private-keys-not-cloneable = []
+fuzzing = []
+
+[package.metadata.cargo-machete]
+ignored = ["serde_bytes"]

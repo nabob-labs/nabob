@@ -1,0 +1,10 @@
+[package]
+name = 'token_lockup'
+version = '1.0.0'
+
+[addresses]
+token_lockup = "_"
+
+[dependencies]
+NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }
+NabobTokenObjects = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-token-objects", rev = "main" }

@@ -1,0 +1,28 @@
+[package]
+name = "move-prover-bytecode-pipeline"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+move-abstract-domain-derive = { workspace = true }
+anyhow = { workspace = true }
+codespan-reporting = { workspace = true }
+itertools = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-model = { workspace = true }
+move-stackless-bytecode = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+
+[dev-dependencies]
+datatest-stable = { workspace = true }
+move-stackless-bytecode-test-utils = { workspace = true }
+shell-words = { workspace = true }
+tempfile = { workspace = true }
+walkdir = { workspace = true }

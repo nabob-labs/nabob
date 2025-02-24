@@ -1,0 +1,34 @@
+[package]
+name = "nabob-indexer-processor-sdk-server-framework"
+version = "1.0.0"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+nabob-indexer-processor-sdk = { path = "../sdk" }
+
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+autometrics = { workspace = true }
+axum = { workspace = true }
+backtrace = { workspace = true }
+clap = { workspace = true }
+instrumented-channel = { path = "../instrumented-channel" }
+prometheus-client = { workspace = true }
+serde = { workspace = true }
+serde_yaml = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+nabob-system-utils = { workspace = true }

@@ -1,0 +1,40 @@
+[package]
+name = "nabob-workspace-svc"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+# nabob deps
+nabob-cached-packages = { workspace = true }
+nabob-config = { workspace = true }
+nabob-faucet-core = { workspace = true }
+nabob-localnet = { workspace = true }
+nabob-node = { workspace = true }
+nabob-types = { workspace = true }
+
+# third party deps
+anyhow = { workspace = true }
+bollard = { workspace = true }
+clap = { workspace = true }
+diesel = { workspace = true, features = [
+    "postgres_backend",
+] }
+diesel-async = { workspace = true }
+futures = { workspace = true }
+maplit = { workspace = true }
+rand = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+url = { workspace = true }
+uuid = { workspace = true }
+
+# indexer deps
+processor = { workspace = true }
+server-framework = { workspace = true }

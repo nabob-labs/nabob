@@ -1,0 +1,16 @@
+[package]
+name = "NabobFramework"
+version = "1.0.0"
+
+[addresses]
+std = "0x1"
+nabob_std = "0x1"
+nabob_framework = "0x1"
+nabob_fungible_asset = "0xA"
+nabob_token = "0x3"
+core_resources = "0xA550C18"
+vm_reserved = "0x0"
+
+[dependencies]
+NabobStdlib = { local = "../nabob-stdlib" }
+MoveStdlib = { local = "../move-stdlib" }

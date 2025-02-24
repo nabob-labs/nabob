@@ -1,0 +1,7 @@
+[package]
+name = "TooLargeTest"
+version = "0.0.0"
+
+[dependencies]
+NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }
+MoveStdlib = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "move-stdlib", rev = "main" }

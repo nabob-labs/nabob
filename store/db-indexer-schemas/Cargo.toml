@@ -1,0 +1,34 @@
+[package]
+name = "nabob-db-indexer-schemas"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-schemadb = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+byteorder = { workspace = true }
+proptest = { workspace = true, optional = true }
+proptest-derive = { workspace = true, optional = true }
+serde = { workspace = true }
+
+[dev-dependencies]
+nabob-proptest-helpers = { workspace = true }
+nabob-schemadb = { workspace = true, features = ["fuzzing"] }
+nabob-types = { workspace = true, features = ["fuzzing"] }
+proptest = { workspace = true }
+proptest-derive = { workspace = true }
+rand = { workspace = true }
+
+[features]
+default = []
+fuzzing = ["proptest", "proptest-derive", "nabob-types/fuzzing", "nabob-schemadb/fuzzing"]

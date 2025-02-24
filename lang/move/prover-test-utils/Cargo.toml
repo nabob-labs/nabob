@@ -1,0 +1,16 @@
+[package]
+name = "move-prover-test-utils"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+move-command-line-common = { workspace = true }
+prettydiff = { workspace = true }
+regex = { workspace = true }

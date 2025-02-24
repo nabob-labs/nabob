@@ -1,0 +1,16 @@
+[package]
+name = "nabob-build-info"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shadow-rs = { workspace = true }
+
+[build-dependencies]
+shadow-rs = { workspace = true }

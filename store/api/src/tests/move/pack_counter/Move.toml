@@ -1,0 +1,9 @@
+[package]
+name = "pack_counter"
+version = "0.0.0"
+
+[dependencies]
+NabobFramework = { local = "../../../../../mos/framework/nabob-framework" }
+
+[addresses]
+addr = "_"

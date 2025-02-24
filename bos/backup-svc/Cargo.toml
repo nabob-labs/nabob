@@ -1,0 +1,36 @@
+[package]
+name = "nabob-backup-svc"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-crypto = { workspace = true }
+nabob-db = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-runtimes = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+hyper = { workspace = true }
+once_cell = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+warp = { workspace = true }
+
+[dev-dependencies]
+nabob-config = { workspace = true }
+nabob-db = { workspace = true, features = ["fuzzing"] }
+nabob-temppath = { workspace = true }
+reqwest = { workspace = true }
+
+[features]
+fuzzing = ["nabob-db/fuzzing"]

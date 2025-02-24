@@ -1,0 +1,48 @@
+[package]
+name = "nabob-storage-svc"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-channels = { workspace = true }
+nabob-config = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-network = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-storage-notify = { workspace = true }
+nabob-storage-types = { workspace = true }
+nabob-time-svc = { workspace = true }
+nabob-types = { workspace = true }
+arc-swap = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+dashmap = { workspace = true }
+futures = { workspace = true }
+mini-moka = { workspace = true }
+once_cell = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+nabob-bitvec = { workspace = true }
+nabob-config = { workspace = true, features = ["fuzzing"] }
+nabob-crypto = { workspace = true }
+nabob-netcore = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-time-svc = { workspace = true, features = ["async", "testing"] }
+nabob-types = { workspace = true }
+claims = { workspace = true }
+maplit = { workspace = true }
+mockall = { workspace = true }
+rand = { workspace = true }

@@ -1,0 +1,20 @@
+[package]
+name = "nabob-github-cli"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-proxy = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+ureq = { workspace = true }
+
+[dev-dependencies]
+base64 = { workspace = true }

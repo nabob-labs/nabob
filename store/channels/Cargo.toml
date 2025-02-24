@@ -1,0 +1,20 @@
+[package]
+name = "nabob-channels"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-metrics-core = { workspace = true }
+futures = { workspace = true }
+
+[dev-dependencies]
+nabob-types = { workspace = true }
+tokio = { workspace = true }

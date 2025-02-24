@@ -1,0 +1,18 @@
+[package]
+name = "nabob-bounded-executor"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+futures = { workspace = true }
+rustversion = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

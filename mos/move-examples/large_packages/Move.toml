@@ -1,0 +1,10 @@
+[package]
+name = "LargePackages"
+version = "1.0.0"
+upgrade_policy = "compatible"
+
+[dependencies]
+NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }
+
+[addresses]
+large_packages = "_"

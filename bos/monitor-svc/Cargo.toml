@@ -1,0 +1,41 @@
+[package]
+name = "nabob-monitor-svc"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-bounded-executor = { workspace = true }
+nabob-build-info = { workspace = true }
+nabob-channels = { workspace = true }
+nabob-config = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-netcore = { workspace = true }
+nabob-network = { workspace = true }
+nabob-monitor-types = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-time-svc = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+futures = { workspace = true }
+once_cell = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-network = { workspace = true, features = ["fuzzing"] }
+nabob-time-svc = { workspace = true, features = ["testing"] }
+claims = { workspace = true }
+maplit = { workspace = true }
+mockall = { workspace = true }
+rand = { workspace = true }

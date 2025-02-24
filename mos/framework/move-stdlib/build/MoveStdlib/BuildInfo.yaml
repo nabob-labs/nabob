@@ -1,0 +1,46 @@
+---
+compiled_package_info:
+  package_name: MoveStdlib
+  address_alias_instantiation:
+    std: "0000000000000000000000000000000000000000000000000000000000000001"
+    vm: "0000000000000000000000000000000000000000000000000000000000000000"
+  source_digest: AC9219C30B19CD598D601383A7F7012EE8A8B7526DACC0AA2B8BB0C08E4EB280
+  build_flags:
+    dev_mode: false
+    test_mode: false
+    override_std: ~
+    generate_docs: false
+    generate_abis: true
+    generate_move_model: true
+    full_model_generation: false
+    install_dir: ~
+    force_recompilation: false
+    additional_named_addresses: {}
+    fetch_deps_only: false
+    skip_fetch_latest_git_deps: true
+    compiler_config:
+      bytecode_version: 7
+      known_attributes:
+        - bytecode_instruction
+        - deprecated
+        - event
+        - expected_failure
+        - "fmt::skip"
+        - legacy_entry_fun
+        - "lint::allow_unsafe_randomness"
+        - "lint::skip"
+        - "mutation::skip"
+        - native_interface
+        - randomness
+        - resource_group
+        - resource_group_member
+        - test
+        - test_only
+        - verify_only
+        - view
+      skip_attribute_checks: false
+      compiler_version: ~
+      language_version: ~
+      experiments: []
+dependencies: []
+bytecode_deps: []

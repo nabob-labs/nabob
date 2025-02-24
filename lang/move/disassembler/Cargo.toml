@@ -1,0 +1,25 @@
+[package]
+name = "move-disassembler"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+colored = { workspace = true }
+move-binary-format = { workspace = true }
+move-bytecode-source-map = { workspace = true }
+move-command-line-common = { workspace = true }
+move-compiler = { workspace = true }
+move-core-types = { workspace = true }
+move-coverage = { workspace = true }
+move-ir-types = { workspace = true }
+
+[features]
+default = []

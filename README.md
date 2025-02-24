@@ -1,2 +1,2 @@
 # nabob
-Future Network Technology
+High-performance financial-grade blockchain.

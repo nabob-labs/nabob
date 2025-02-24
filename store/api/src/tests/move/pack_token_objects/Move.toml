@@ -1,0 +1,10 @@
+[package]
+name = "pack_token_objects"
+version = "0.0.0"
+
+[dependencies]
+NabobFramework = { local = "../../../../../mos/framework/nabob-framework" }
+NabobTokenObjects = { local = "../../../../../mos/framework/nabob-token-objects" }
+
+[addresses]
+addr = "_"

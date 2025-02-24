@@ -1,0 +1,805 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "lang/move/core-types",
+    "lang/move/bytecode-spec",
+    "lang/move/binary-format",
+    "lang/move/invalid-mutations",
+    "lang/move/borrow-graph",
+    "lang/move/bytecode-verifier",
+    "lang/move/vm-metrics",
+    "lang/move/vm-types",
+    "lang/move/vm-runtime",
+    "lang/move/command-line-common",
+    "lang/move/symbol-pool",
+    "lang/move/ir-types",
+    "lang/move/ir-to-bytecode-syntax",
+    "lang/move/bytecode-source-map",
+    "lang/move/ir-to-bytecode",
+    "lang/move/ir-compiler",
+    "lang/move/compiler",
+    "lang/move/coverage",
+    "lang/move/disassembler",
+    "lang/move/model",
+    "lang/move/abstract-domain-derive",
+    "lang/move/stackless-bytecode",
+    "lang/move/compiler-v2",
+    "lang/move/abigen",
+    "lang/move/docgen",
+    "lang/move/errmapgen",
+    "lang/move/prover-bytecode-pipeline",
+    "lang/move/prover-boogie-backend",
+    "lang/move/prover-test-utils",
+    "lang/move/prover",
+    "lang/move/prover-lab",
+    "lang/move/bytecode-utils",
+    "lang/move/package",
+    "lang/move/stdlib",
+    "lang/move/bytecode-viewer",
+    "lang/move/table-extension",
+    "lang/move/vm-test-utils",
+    "lang/move/resource-viewer",
+    "lang/move/unit-test",
+    "lang/move/cli",
+    "lang/move/linter",
+    "lang/move/stackless-bytecode-test-utils",
+    "mos/crypto-derive",
+    "mos/crypto",
+    "mos/bitvec",
+    "mos/runtimes",
+    "mos/dkg",
+    "mos/runtimes-extension",
+    "mos/infallible",
+    "mos/proptest-helpers",
+    "mos/types",
+    "mos/sdk-builder",
+    "mos/aggregator",
+    "mos/gas-algebra",
+    "mos/global-constants",
+    "mos/gas-schedule",
+    "mos/vm-types",
+    "mos/native-interface",
+    "mos/table-natives",
+    "mos/framework/move-stdlib",
+    "mos/framework",
+    "mos/package-builder",
+    "mos/framework/cached-packages",
+    "mos/vm-environment",
+    "mos/speculative-state-helper",
+    "mos/log-derive",
+    "mos/node-identity",
+    "mos/logger",
+    "mos/metrics-core",
+    "mos/vm-logging",
+    "mos/hashmap",
+    "mos/drop-helper",
+    "mos/block-executor",
+    "mos/block-partitioner",
+    "mos/gas-meter",
+    "mos/memory-usage-tracker",
+    "mos/utils",
+    "mos/vm",
+    "mos/vm-genesis",
+    "mos/keygen",
+    "mos/gas-profiling",
+    "mos/move-examples",
+    "mos/abstract-gas-usage",
+    "mos/language-e2e-tests",
+    "store/protos/rust",
+    "store/scratchpad",
+    "store/secure-net",
+    "store/layered-map",
+    "store/storage-interface",
+    "store/accumulator",
+    "store/time-svc",
+    "store/vault-cli",
+    "store/temppath",
+    "store/secure-storage",
+    "store/short-hex-str",
+    "store/config",
+    "store/schemadb",
+    "store/db-indexer-schemas",
+    "store/resource-viewer",
+    "store/rocksdb-options",
+    "store/db-indexer",
+    "store/jellyfish-merkle",
+    "store/executor-types",
+    "store/consensus-types",
+    "store/build-info",
+    "store/push-metrics",
+    "store/resource-metrics",
+    "store/executor-svc",
+    "store/ledger",
+    "store/openapi",
+    "store/api-types",
+    "store/rest-cli",
+    "store/sdk",
+    "store/transaction-filter",
+    "store/indexer-grpc-utils",
+    "store/channels",
+    "store/id-generator",
+    "store/event-notify",
+    "store/mempool-notify",
+    "store/monitor-types",
+    "store/memsocket",
+    "store/proxy",
+    "store/netcore",
+    "store/compression",
+    "store/num-variants",
+    "store/network",
+    "store/vm-validator",
+    "store/bounded-executor",
+    "store/mempool",
+    "store/bcs-utils",
+    "store/api",
+    "store/moving-average",
+    "store/indexer-grpc-fullnode",
+    "store/indexer-grpc-table-info",
+    "store/executor",
+    "store/db",
+    "store/genesis",
+    "store/executor-test-helpers",
+    "store/api-test-context",
+    "bos/safety-rules",
+    "bos/collections",
+    "bos/consensus-notify",
+    "bos/enum-convert-derive",
+    "bos/reliable-broadcast",
+    "bos/validator-txpool",
+    "bos/fallible",
+    "bos/consensus",
+    "bos/jwk-utils",
+    "bos/jwk-consensus",
+    "bos/dkg-runtime",
+    "bos/network-benchmark",
+    "bos/network-discovery",
+    "bos/network-builder",
+    "bos/monitor-svc",
+    "bos/monitor-cli",
+    "bos/storage-types",
+    "bos/storage-notify",
+    "bos/storage-svc",
+    "bos/storage-cli",
+    "bos/data-cli",
+    "bos/data-stream-svc",
+    "bos/state-svc",
+    "bos/telemetry-svc",
+    "bos/telemetry-cli",
+    "bos/inspection-svc",
+    "bos/profiler",
+    "bos/system-utils",
+    "bos/admin-svc",
+    "bos/backup-svc",
+    "bos/indexer",
+    "bos/crash-handler",
+    "bos/node",
+    "tool/indexer/grpc-server-framework",
+    "tool/indexer/test-transactions",
+    "tool/faucet/metrics-svc",
+    "tool/faucet/core",
+    "tool/faucet/svc",
+    "tool/faucet/cli",
+    "tool/client/backup-cli",
+    "tool/client/cli-common",
+    "tool/client/github-cli",
+    "tool/client/localnet",
+    "tool/client/validator-interface",
+    "tool/client/move-debugger",
+    "tool/client/network-checker",
+    "tool/client/workspace-svc",
+    "tool/client/nabob",
+]
+
+exclude = [
+    "tool/indexer/processors-sdk/instrumented-channel",
+    "tool/indexer/processors-sdk/sample",
+    "tool/indexer/processors-sdk/transaction-stream",
+    "tool/indexer/processors-sdk/sdk",
+    "tool/indexer/processors-sdk/sdk-server-framework",
+    "tool/indexer/processors-sdk/testing-framework",
+    "tool/indexer/processors/server-framework",
+    "tool/indexer/processors/sdk-processor",
+    "tool/indexer/processors/processor",
+]
+
+# All workspace members should inherit these keys
+# for package declarations.
+[workspace.package]
+authors = ["Nabob Labs"]
+edition = "2021"
+homepage = "https://nabob-labs.com"
+license = "Apache-2.0"
+publish = false
+repository = "https://github.com/nabob-labs/nabob"
+version = "0.1.0"
+rust-version = "1.78.0"
+
+[workspace.dependencies]
+# Language dependencies
+move-core-types = { path = "lang/move/core-types" }
+move-bytecode-spec = { path = "lang/move/bytecode-spec" }
+move-binary-format = { path = "lang/move/binary-format" }
+move-invalid-mutations = { path = "lang/move/invalid-mutations" }
+move-borrow-graph = { path = "lang/move/borrow-graph" }
+move-bytecode-verifier = { path = "lang/move/bytecode-verifier" }
+move-vm-metrics = { path = "lang/move/vm-metrics" }
+move-vm-types = { path = "lang/move/vm-types" }
+move-vm-runtime = { path = "lang/move/vm-runtime" }
+move-command-line-common = { path = "lang/move/command-line-common" }
+move-symbol-pool = { path = "lang/move/symbol-pool" }
+move-ir-types = { path = "lang/move/ir-types" }
+move-ir-to-bytecode-syntax = { path = "lang/move/ir-to-bytecode-syntax" }
+move-bytecode-source-map = { path = "lang/move/bytecode-source-map" }
+move-ir-to-bytecode = { path = "lang/move/ir-to-bytecode" }
+move-ir-compiler = { path = "lang/move/ir-compiler" }
+move-compiler = { path = "lang/move/compiler" }
+move-coverage = { path = "lang/move/coverage" }
+move-disassembler = { path = "lang/move/disassembler" }
+move-model = { path = "lang/move/model" }
+move-abstract-domain-derive = { path = "lang/move/abstract-domain-derive" }
+move-stackless-bytecode = { path = "lang/move/stackless-bytecode" }
+move-compiler-v2 = { path = "lang/move/compiler-v2" }
+move-abigen = { path = "lang/move/abigen" }
+move-docgen = { path = "lang/move/docgen" }
+move-errmapgen = { path = "lang/move/errmapgen" }
+move-prover-bytecode-pipeline = { path = "lang/move/prover-bytecode-pipeline" }
+move-prover-boogie-backend = { path = "lang/move/prover-boogie-backend" }
+move-prover-test-utils = { path = "lang/move/prover-test-utils" }
+move-prover = { path = "lang/move/prover" }
+move-prover-lab = { path = "lang/move/prover-lab" }
+move-bytecode-utils = { path = "lang/move/bytecode-utils" }
+move-package = { path = "lang/move/package" }
+move-stdlib = { path = "lang/move/stdlib" }
+move-bytecode-viewer = { path = "lang/move/bytecode-viewer" }
+move-table-extension = { path = "lang/move/table-extension" }
+move-vm-test-utils = { path = "lang/move/vm-test-utils" }
+move-resource-viewer = { path = "lang/move/resource-viewer" }
+move-unit-test = { path = "lang/move/unit-test" }
+move-cli = { path = "lang/move/cli" }
+move-linter = { path = "lang/move/linter" }
+move-stackless-bytecode-test-utils = { path = "lang/move/stackless-bytecode-test-utils" }
+
+# MoveOS dependencies
+nabob-crypto-derive = { path = "mos/crypto-derive" }
+nabob-crypto = { path = "mos/crypto" }
+nabob-bitvec = { path = "mos/bitvec" }
+nabob-runtimes = { path = "mos/runtimes" }
+nabob-dkg = { path = "mos/dkg" }
+nabob-runtimes-extension = { path = "mos/runtimes-extension" }
+nabob-infallible = { path = "mos/infallible" }
+nabob-proptest-helpers = { path = "mos/proptest-helpers" }
+nabob-types = { path = "mos/types" }
+nabob-sdk-builder = { path = "mos/sdk-builder" }
+nabob-aggregator = { path = "mos/aggregator" }
+nabob-gas-algebra = { path = "mos/gas-algebra" }
+nabob-global-constants = { path = "mos/global-constants" }
+nabob-gas-schedule = { path = "mos/gas-schedule" }
+nabob-vm-types = { path = "mos/vm-types" }
+nabob-native-interface = { path = "mos/native-interface" }
+nabob-table-natives = { path = "mos/table-natives" }
+nabob-move-stdlib = { path = "mos/framework/move-stdlib" }
+nabob-framework = { path = "mos/framework" }
+nabob-package-builder = { path = "mos/package-builder" }
+nabob-cached-packages = { path = "mos/framework/cached-packages" }
+nabob-vm-environment = { path = "mos/vm-environment" }
+nabob-speculative-state-helper = { path = "mos/speculative-state-helper" }
+nabob-log-derive = { path = "mos/log-derive" }
+nabob-node-identity = { path = "mos/node-identity" }
+nabob-logger = { path = "mos/logger" }
+nabob-metrics-core = { path = "mos/metrics-core" }
+nabob-vm-logging = { path = "mos/vm-logging" }
+nabob-move-hashmap = { path = "mos/hashmap" }
+nabob-drop-helper = { path = "mos/drop-helper" }
+nabob-block-executor = { path = "mos/block-executor" }
+nabob-block-partitioner = { path = "mos/block-partitioner" }
+nabob-gas-meter = { path = "mos/gas-meter" }
+nabob-memory-usage-tracker = { path = "mos/memory-usage-tracker" }
+nabob-utils = { path = "mos/utils" }
+nabob-vm = { path = "mos/vm" }
+nabob-vm-genesis = { path = "mos/vm-genesis" }
+nabob-keygen = { path = "mos/keygen" }
+nabob-gas-profiling = { path = "mos/gas-profiling" }
+nabob-move-examples = { path = "mos/move-examples" }
+nabob-abstract-gas-usage = { path = "mos/abstract-gas-usage" }
+nabob-language-e2e-tests = { path = "mos/language-e2e-tests" }
+
+# Storage dependencies
+nabob-protos = { path = "store/protos/rust" }
+nabob-scratchpad = { path = "store/scratchpad" }
+nabob-secure-net = { path = "store/secure-net" }
+nabob-layered-map = { path = "store/layered-map" }
+nabob-storage-interface = { path = "store/storage-interface" }
+nabob-accumulator = { path = "store/accumulator" }
+nabob-time-svc = { path = "store/time-svc", features = [ "async" ] }
+nabob-vault-cli = { path = "store/vault-cli" }
+nabob-temppath = { path = "store/temppath" }
+nabob-secure-storage = { path = "store/secure-storage" }
+nabob-short-hex-str = { path = "store/short-hex-str" }
+nabob-config = { path = "store/config" }
+nabob-schemadb = { path = "store/schemadb" }
+nabob-db-indexer-schemas = { path = "store/db-indexer-schemas" }
+nabob-resource-viewer = { path = "store/resource-viewer" }
+nabob-rocksdb-options = { path = "store/rocksdb-options" }
+nabob-db-indexer = { path = "store/db-indexer" }
+nabob-jellyfish-merkle = { path = "store/jellyfish-merkle" }
+nabob-executor-types = { path = "store/executor-types" }
+nabob-consensus-types = { path = "store/consensus-types" }
+nabob-build-info = { path = "store/build-info" }
+nabob-push-metrics = { path = "store/push-metrics" }
+nabob-node-resource-metrics = { path = "store/resource-metrics" }
+nabob-executor-svc = { path = "store/executor-svc" }
+nabob-ledger = { path = "store/ledger" }
+nabob-openapi = { path = "store/openapi" }
+nabob-api-types = { path = "store/api-types" }
+nabob-rest-cli = { path = "store/rest-cli" }
+nabob-sdk = { path = "store/sdk" }
+nabob-transaction-filter = { path = "store/transaction-filter" }
+nabob-indexer-grpc-utils = { path = "store/indexer-grpc-utils" }
+nabob-channels = { path = "store/channels" }
+nabob-id-generator = { path = "store/id-generator" }
+nabob-event-notify = { path = "store/event-notify" }
+nabob-mempool-notify = { path = "store/mempool-notify" }
+nabob-monitor-types = { path = "store/monitor-types" }
+nabob-memsocket = { path = "store/memsocket" }
+nabob-proxy = { path = "store/proxy" }
+nabob-netcore = { path = "store/netcore" }
+nabob-compression = { path = "store/compression" }
+nabob-num-variants = { path = "store/num-variants" }
+nabob-network = { path = "store/network" }
+nabob-vm-validator = { path = "store/vm-validator" }
+nabob-bounded-executor = { path = "store/bounded-executor" }
+nabob-mempool = { path = "store/mempool" }
+nabob-bcs-utils = { path = "store/bcs-utils" }
+nabob-api = { path = "store/api" }
+nabob-moving-average = { path = "store/moving-average" }
+nabob-indexer-grpc-fullnode = { path = "store/indexer-grpc-fullnode" }
+nabob-indexer-grpc-table-info = { path = "store/indexer-grpc-table-info" }
+nabob-executor = { path = "store/executor" }
+nabob-db = { path = "store/db" }
+nabob-genesis = { path = "store/genesis" }
+nabob-executor-test-helpers = { path = "store/executor-test-helpers" }
+nabob-api-test-context = { path = "store/api-test-context" }
+
+# BOS dependencies
+nabob-safety-rules = { path = "bos/safety-rules" }
+nabob-collections = { path = "bos/collections" }
+nabob-consensus-notify = { path = "bos/consensus-notify" }
+nabob-enum-convert-derive = { path = "bos/enum-convert-derive" }
+nabob-reliable-broadcast = { path = "bos/reliable-broadcast" }
+nabob-validator-txpool = { path = "bos/validator-txpool" }
+nabob-fallible = { path = "bos/fallible" }
+nabob-consensus = { path = "bos/consensus" }
+nabob-jwk-utils = { path = "bos/jwk-utils" }
+nabob-jwk-consensus = { path = "bos/jwk-consensus" }
+nabob-dkg-runtime = { path = "bos/dkg-runtime" }
+nabob-network-benchmark = { path = "bos/network-benchmark" }
+nabob-network-discovery = { path = "bos/network-discovery" }
+nabob-network-builder = { path = "bos/network-builder" }
+nabob-monitor-svc = { path = "bos/monitor-svc" }
+nabob-monitor-cli = { path = "bos/monitor-cli" }
+nabob-storage-types = { path = "bos/storage-types" }
+nabob-storage-notify = { path = "bos/storage-notify" }
+nabob-storage-svc = { path = "bos/storage-svc" }
+nabob-storage-cli = { path = "bos/storage-cli" }
+nabob-data-cli = { path = "bos/data-cli" }
+nabob-data-stream-svc = { path = "bos/data-stream-svc" }
+nabob-state-svc = { path = "bos/state-svc" }
+nabob-telemetry-svc = { path = "bos/telemetry-svc" }
+nabob-telemetry-cli = { path = "bos/telemetry-cli" }
+nabob-inspection-svc = { path = "bos/inspection-svc" }
+nabob-profiler = { path = "bos/profiler" }
+nabob-system-utils = { path = "bos/system-utils" }
+nabob-admin-svc = { path = "bos/admin-svc" }
+nabob-backup-svc = { path = "bos/backup-svc" }
+nabob-indexer = { path = "bos/indexer" }
+nabob-crash-handler = { path = "bos/crash-handler" }
+nabob-node = { path = "bos/node" }
+
+# Tool
+nabob-indexer-grpc-server-framework = { path = "tool/indexer/grpc-server-framework" }
+nabob-indexer-test-transactions = { path = "tool/indexer/test-transactions" }
+server-framework = { path = "tool/indexer/processors/server-framework" }
+processor = { path = "tool/indexer/processors/processor" }
+nabob-faucet-metrics-svc = { path = "tool/faucet/metrics-svc" }
+nabob-faucet-core = { path = "tool/faucet/core" }
+nabob-backup-cli = { path = "tool/client/backup-cli" }
+nabob-cli-common = { path = "tool/client/cli-common" }
+nabob-github-cli = { path = "tool/client/github-cli" }
+nabob-localnet = { path = "tool/client/localnet" }
+nabob-validator-interface = { path = "tool/client/validator-interface" }
+nabob-move-debugger = { path = "tool/client/move-debugger" }
+nabob-network-checker = { path = "tool/client/network-checker" }
+nabob-workspace-svc = { path = "tool/client/workspace-svc" }
+nabob = { path = "tool/client/nabob" }
+
+aes-gcm = "0.10.3"
+ahash = { version = "0.8.11", features = ["serde"] }
+atty = "0.2.14"
+nalgebra = "0.32"
+float-cmp = "0.9.0"
+again = "0.1.2"
+ambassador = "0.4.1"
+anyhow = "1.0.71"
+anstyle = "1.0.1"
+arbitrary = { version = "1.3.2", features = ["derive"] }
+arc-swap = "1.6.0"
+arr_macro = "0.2.1"
+ark-bls12-381 = "0.4.0"
+ark-bn254 = "0.4.0"
+ark-ec = "0.4.0"
+ark-ff = "0.4.0"
+ark-groth16 = "0.4.0"
+ark-relations = "0.4.0"
+ark-serialize = "0.4.0"
+ark-std = { version = "0.4.0", features = ["getrandom"] }
+assert_approx_eq = "1.1.0"
+async-channel = "1.7.1"
+async-mutex = "1.4.0"
+async-recursion = "1.0.5"
+async-trait = "0.1.53"
+axum = "0.7.5"
+base64 = "0.13.0"
+backoff = { version = "0.4.0", features = ["tokio"] }
+backtrace = "0.3.58"
+bcs = { git = "https://github.com/aptos-labs/bcs.git", rev = "d31fab9d81748e2594be5cd5cdf845786a30562d" }
+better_any = "0.1.1"
+bigdecimal = { version = "0.4.0", features = ["serde"] }
+version-compare = "0.1.1"
+bitvec = "1.0.1"
+blake2 = "0.10.4"
+blake2-rfc = "0.2.18"
+blst = "0.3.11"
+blstrs = { version = "0.7.1", features = ["serde", "__private_bench"] }
+bollard = "0.15"
+build_html = "2.5.0"
+bulletproofs = { version = "4.0.0" }
+byteorder = "1.4.3"
+bytes = { version = "1.4.0", features = ["serde"] }
+bytesize = { version = "1.3.0" }
+camino = { version = "1.1.6" }
+chrono = { version = "0.4.19", features = ["clock", "serde"] }
+cfg-if = "1.0.0"
+ciborium = "0.2"
+claims = "0.7"
+clap = { version = "4.3.9", features = [
+    "derive",
+    "env",
+    "unstable-styles",
+    "wrap_help",
+] }
+clap-verbosity-flag = "2.1.1"
+clap_complete = "4.4.1"
+cloud-storage = { version = "0.11.1", features = [
+    "global-client",
+    "rustls-tls",
+], default-features = false }
+codespan = "0.11.1"
+codespan-reporting = "0.11.1"
+colored = "2.0.0"
+concurrent-queue = "2.2.0"
+console-subscriber = "0.3.0"
+core_affinity = "0.8.1"
+coset = "0.3"
+criterion = "0.3.5"
+criterion-cpu-time = "0.1.0"
+crossbeam = "0.8.1"
+crossbeam-channel = "0.5.4"
+crossterm = "0.26.1"
+csv = "1.2.1"
+curve25519-dalek = "3"
+curve25519-dalek-ng = "4"
+dashmap = { version = "5.5.3", features = ["inline"] }
+datatest-stable = "0.1.1"
+debug-ignore = { version = "1.0.3", features = ["serde"] }
+derivative = "2.2.0"
+derivation-path = "0.2.0"
+derive_builder = "0.20.0"
+determinator = "0.12.0"
+derive_more = "0.99.11"
+diesel = { version = "2.1", features = ["uuid"] }
+diesel-async = { git = "https://github.com/weiznich/diesel_async.git", rev = "d02798c67065d763154d7272dd0c09b39757d0f2", features = [
+    "async-connection-wrapper",
+    "postgres",
+    "bb8",
+    "tokio",
+] }
+diesel_migrations = { version = "2.1.0", features = ["postgres"] }
+difference = "2.0.0"
+digest = "0.9.0"
+dir-diff = "0.3.2"
+dirs = "5.0.1"
+dirs-next = "2.0.0"
+dunce = "1.0.4"
+ed25519-dalek = { version = "1.0.1", features = ["std", "serde"] }
+ed25519-dalek-bip32 = "0.2.0"
+either = "1.6.1"
+enum_dispatch = "0.3.12"
+env_logger = "0.10.0"
+erased-serde = "0.3.13"
+ethnum = "1.5.0"
+dearbitrary = { version = "1.0.4", features = ["derive"] }
+fail = "0.5.0"
+ff = { version = "0.13", features = ["derive"] }
+field_count = "0.1.1"
+file_diff = "1.0.0"
+firebase-token = { git = "https://github.com/aptos-labs/firebase-token", rev = "34ea512d3d1fad6c11df3e7d82ff72beccc05836" }
+firestore = "0.43.0"
+fixed = "1.25.1"
+flate2 = "1.0.24"
+flexi_logger = "0.27.4"
+futures = "0.3.29"
+futures-channel = "0.3.29"
+futures-core = "0.3.29"
+futures-util = "0.3.29"
+fxhash = "0.2.1"
+getrandom = "0.2.2"
+gcp-bigquery-client = "0.16.8"
+get_if_addrs = "0.5.3"
+git2 = "0.16.1"
+glob = "0.3.0"
+goldenfile = "1.5.2"
+google-cloud-storage = "0.13.0"
+group = "0.13"
+guppy = "0.17.5"
+handlebars = "4.2.2"
+hashbrown = "0.14.3"
+heck = "0.4.1"
+hex = { version = "0.4.3", features = ["serde"] }
+hex-literal = "0.3.4"
+hkdf = "0.10.0"
+hmac = "0.12.0"
+hostname = "0.3.1"
+http = "0.2.9"
+httpmock = "0.6.8"
+hyper = { version = "0.14.18", features = ["full"] }
+im = "15.0.0"
+image = "0.24.5"
+indexmap = "2.7.0"
+indicatif = "0.15.0"
+indoc = "1.0.6"
+inferno = "0.11.14"
+internment = { version = "0.5.0", features = ["arc"] }
+ipnet = "2.5.0"
+itertools = "0.13"
+jemallocator = { version = "0.5.0", features = [
+    "profiling",
+    "unprefixed_malloc_on_supported_platforms",
+] }
+jemalloc-sys = "0.5.4"
+json-patch = "0.2.6"
+jsonwebtoken = "8.1"
+jwt = "0.16.0"
+lazy_static = "1.4.0"
+libc = "0.2.147"
+libfuzzer-sys = "0.4.6"
+libsecp256k1 = "0.7.0"
+log = "0.4.17"
+lru = "0.7.5"
+lz4 = "1.25.0"
+maplit = "1.0.2"
+merlin = "3"
+memchr = "2.7.4"
+memory-stats = "1.0.0"
+mime = "0.3.16"
+mini-moka = { version = "0.10.3", features = ["sync"] }
+mirai-annotations = "1.12.0"
+mockall = "0.11.4"
+more-asserts = "0.3.0"
+named-lock = "0.2.0"
+native-tls = "0.2.10"
+neptune = { version = "13.0.0", default_features = false }
+ntest = "0.9.3"
+num = "0.4.0"
+num-bigint = { version = "0.3.2", features = ["rand"] }
+num_cpus = "1.13.1"
+num-derive = "0.3.3"
+num-integer = "0.1.42"
+num-traits = "0.2.15"
+once_cell = "1.10.0"
+open = "5.3.1"
+ordered-float = "3.9.1"
+ouroboros = "0.15.6"
+owo-colors = "3.5.0"
+p256 = { version = "0.13.2" }
+prettydiff = "0.6.2"
+primitive-types = { version = "0.10" }
+signature = "2.1.0"
+pairing = "0.23"
+parking_lot = "0.12.0"
+paste = "1.0.7"
+pathsearch = "0.2.0"
+passkey-authenticator = { version = "0.2.0", features = ["testable"] }
+passkey-client = { version = "0.2.0" }
+passkey-types = { version = "0.2.0" }
+pbjson = "0.5.1"
+percent-encoding = "2.1.0"
+petgraph = "0.6.5"
+pin-project = "1.0.10"
+plotters = { version = "0.3.5", default-features = false }
+poem = { version = "3.1.3", features = ["anyhow", "compression", "rustls"] }
+poem-openapi = { version = "5.1.2", features = ["swagger-ui", "url"] }
+poem-openapi-derive = "5.1.1"
+poseidon-ark = { git = "https://github.com/arnaucube/poseidon-ark.git", rev = "6d2487aa1308d9d3860a2b724c485d73095c1c68" }
+pprof = { version = "0.11", features = ["flamegraph", "protobuf-codec"] }
+pretty = "0.10.0"
+pretty_assertions = "1.2.1"
+procfs = "0.14.1"
+proc-macro2 = "1.0.38"
+project-root = "0.2.2"
+prometheus = { version = "0.13.3", default-features = false }
+prometheus-http-query = "0.5.2"
+prometheus-parse = "0.2.4"
+proptest = "1.4.0"
+proptest-derive = "0.4.0"
+prost = { version = "0.13.4", features = ["no-recursion-limit"] }
+prost-types = "0.13.3"
+quanta = "0.10.1"
+quick_cache = "0.5.1"
+quick-junit = "0.5.0"
+quote = "1.0.18"
+rand = "0.7.3"
+rand_core = "0.5.1"
+random_word = "0.3.0"
+rayon = "1.5.2"
+redis = { version = "0.22.3", features = [
+    "tokio-comp",
+    "script",
+    "connection-manager",
+] }
+redis-test = { version = "0.1.1", features = ["aio"] }
+ref-cast = "1.0.6"
+regex = "1.9.3"
+reqwest = { version = "0.11.11", features = [
+    "blocking",
+    "cookies",
+    "json",
+    "multipart",
+    "stream",
+] }
+reqwest-middleware = "0.2.0"
+reqwest-retry = "0.2.1"
+ring = { version = "0.16.20", features = ["std"] }
+ripemd = "0.1.1"
+rlimit = "0.10.2"
+rocksdb = { version = "0.22.0", features = ["lz4"] }
+rsa = { version = "0.9.6" }
+rstack-self = { version = "0.3.0", features = ["dw"], default_features = false }
+rstest = "0.15.0"
+rusty-fork = "0.3.0"
+rustversion = "1.0.14"
+scopeguard = "1.2.0"
+sha2 = "0.9.3"
+sha256 = "1.4.0"
+sha2_0_10_6 = { package = "sha2", version = "0.10.6" }
+sha3 = "0.9.1"
+shell-words = "1.0.0"
+siphasher = "0.3.10"
+serde = { version = "1.0.193", features = ["derive", "rc"] }
+serde-big-array = "0.5.1"
+serde_bytes = "0.11.6"
+serde_json = { version = "1.0.81", features = [
+    "preserve_order",
+    "arbitrary_precision",
+] } # Note: arbitrary_precision is required to parse u256 in JSON
+serde_repr = "0.1"
+serde_merge = "0.1.3"
+serde-name = "0.1.1"
+serde-generate = { git = "https://github.com/aptos-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
+serde-reflection = { git = "https://github.com/aptos-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
+serde_with = "3.4.0"
+serde_yaml = "0.8.24"
+set_env = "1.3.4"
+shadow-rs = "0.16.2"
+simplelog = "0.9.0"
+smallbitvec = "2.5.1"
+smallvec = "1.8.0"
+static_assertions = "1.1.0"
+status-line = "0.2.0"
+strum = "0.24.1"
+strum_macros = "0.24.2"
+sugars = "3.0.1"
+syn = { version = "1.0.92", features = ["derive", "extra-traits"] }
+sysinfo = "0.28.4"
+tar = "0.4.40"
+tempfile = "3.3.0"
+tera = "1.16.0"
+termcolor = "1.1.2"
+test-case = "3.1.0"
+textwrap = "0.15.0"
+thiserror = "1.0.37"
+threadpool = "1.8.1"
+thread_local = "1.1.7"
+tiny-bip39 = "0.8.2"
+tiny-keccak = { version = "2.0.2", features = ["keccak", "sha3"] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.17", features = ["json", "env-filter"] }
+trybuild = "1.0.80"
+try_match = "0.4.2"
+tokio = { version = "1.35.1", features = ["full"] }
+tokio-io-timeout = "1.2.0"
+tokio-retry = "0.3.0"
+tokio-scoped = { version = "0.2.0" }
+tokio-stream = { version = "0.1.14", features = ["fs"] }
+tokio-test = "0.4.1"
+tokio-util = { version = "0.7.2", features = ["compat", "codec"] }
+toml = "0.7.4"
+tonic = { version = "0.12.3", features = [
+    "tls-roots",
+    "transport",
+    "prost",
+    "gzip",
+    "codegen",
+    "zstd",
+] }
+tonic-reflection = "0.12.3"
+topological-sort = "0.2.2"
+triomphe = "0.1.9"
+tui = "0.19.0"
+typed-arena = "2.0.2"
+typenum = "1.17.0"
+uint = "0.9.4"
+ureq = { version = "1.5.4", features = [
+    "json",
+    "native-tls",
+], default_features = false }
+url = { version = "2.4.0", features = ["serde"] }
+uuid = { version = "1.0.0", features = ["v4", "serde"] }
+variant_count = "1.1.0"
+walkdir = "2.3.3"
+warp = { version = "0.3.5", features = ["tls"] }
+warp-reverse-proxy = "1.0.0"
+wasm-bindgen = "0.2.95"
+wasm-bindgen-futures = "0.4.42"
+which = "4.2.5"
+whoami = "1.5.0"
+x25519-dalek = "1.2.0"
+z3tracer = "0.8.0"
+
+[profile.release]
+debug = true
+overflow-checks = true
+
+# The performance build is not currently recommended
+# for production deployments. It has not been widely tested.
+[profile.performance]
+inherits = "release"
+opt-level = 3
+debug = true
+overflow-checks = true
+lto = "thin"
+codegen-units = 1
+
+[profile.cli]
+inherits = "release"
+debug = false
+opt-level = "z"
+lto = "thin"
+strip = true
+codegen-units = 1
+
+[profile.ci]
+inherits = "release"
+debug = "line-tables-only"
+overflow-checks = true
+debug-assertions = true
+
+[profile.bench]
+debug = true
+
+[profile.dev]
+debug = 1
+
+[patch.crates-io]
+serde-reflection = { git = "https://github.com/aptos-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
+merlin = { git = "https://github.com/aptos-labs/merlin" }
+x25519-dalek = { git = "https://github.com/aptos-labs/x25519-dalek", rev = "b9cdbaf36bf2a83438d9f660e5a708c82ed60d8e" }
+futures = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-channel = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-executor = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-core = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-util = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-sink = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-io = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-task = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+futures-macro = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }

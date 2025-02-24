@@ -1,0 +1,35 @@
+[package]
+name = "nabob-rest-cli"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[features]
+default = ["dpn"]
+dpn = []
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-api-types = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+hex = { workspace = true }
+move-core-types = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+clap = { workspace = true }

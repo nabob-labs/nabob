@@ -1,0 +1,74 @@
+[package]
+name = "nabob-network"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-bitvec = { workspace = true }
+nabob-channels = { workspace = true }
+nabob-compression = { workspace = true }
+nabob-config = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-id-generator = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-memsocket = { workspace = true, optional = true }
+nabob-metrics-core = { workspace = true }
+nabob-netcore = { workspace = true }
+nabob-num-variants = { workspace = true }
+nabob-monitor-types = { workspace = true }
+nabob-proptest-helpers = { workspace = true, optional = true }
+nabob-short-hex-str = { workspace = true }
+nabob-time-svc = { workspace = true }
+nabob-types = { workspace = true }
+arc-swap = { workspace = true }
+async-trait = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+futures = { workspace = true }
+futures-util = { workspace = true }
+hex = { workspace = true }
+itertools = { workspace = true }
+maplit = { workspace = true }
+once_cell = { workspace = true }
+ordered-float = { workspace = true }
+pin-project = { workspace = true }
+proptest = { workspace = true, optional = true }
+proptest-derive = { workspace = true, optional = true }
+rand = { workspace = true, features = ["small_rng"] }
+rand_latest = { package = "rand", version = "0.8.5" }
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tokio-retry = { workspace = true }
+tokio-stream = { workspace = true }
+tokio-util = { workspace = true }
+
+[dev-dependencies]
+nabob-bitvec = { workspace = true, features = ["fuzzing"] }
+nabob-config = { workspace = true, features = ["testing"] }
+nabob-memsocket = { workspace = true }
+nabob-netcore = { workspace = true, features = ["testing"] }
+nabob-proptest-helpers = { workspace = true }
+nabob-time-svc = { workspace = true, features = ["testing"] }
+nabob-types = { workspace = true, features = ["fuzzing"] }
+proptest = { workspace = true }
+proptest-derive = { workspace = true }
+rand_core = { workspace = true }
+
+[features]
+default = []
+fuzzing = ["nabob-bitvec/fuzzing", "nabob-config/fuzzing", "nabob-crypto/fuzzing", "nabob-types/fuzzing", "nabob-proptest-helpers", "nabob-time-svc/testing", "nabob-types/fuzzing", "nabob-memsocket/testing", "nabob-netcore/fuzzing", "proptest", "proptest-derive"]
+testing = ["nabob-config/testing", "nabob-time-svc/testing", "nabob-memsocket/testing", "nabob-netcore/testing"]
+
+[package.metadata.cargo-machete]
+ignored = ["serde_bytes"]

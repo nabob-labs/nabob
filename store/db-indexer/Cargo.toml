@@ -1,0 +1,37 @@
+[package]
+name = "nabob-db-indexer"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-config = { workspace = true }
+nabob-db-indexer-schemas = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-metrics-core = { workspace = true }
+nabob-resource-viewer = { workspace = true }
+nabob-rocksdb-options = { workspace = true }
+nabob-schemadb = { workspace = true }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+dashmap = { workspace = true }
+move-core-types = { workspace = true }
+once_cell = { workspace = true }
+
+[dev-dependencies]
+nabob-proptest-helpers = { workspace = true }
+nabob-schemadb = { workspace = true, features = ["fuzzing"] }
+nabob-types = { workspace = true, features = ["fuzzing"] }
+rand = { workspace = true }
+
+[features]
+default = []
+fuzzing = ["nabob-types/fuzzing", "nabob-schemadb/fuzzing"]

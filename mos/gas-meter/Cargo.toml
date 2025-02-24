@@ -1,0 +1,20 @@
+[package]
+name = "nabob-gas-meter"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nabob-gas-algebra = { workspace = true }
+nabob-gas-schedule = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-types = { workspace = true }
+nabob-vm-types = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-vm-types = { workspace = true }

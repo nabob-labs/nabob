@@ -1,0 +1,44 @@
+[package]
+name = "nabob-consensus-types"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-bitvec = { workspace = true }
+nabob-crypto = { workspace = true }
+nabob-crypto-derive = { workspace = true }
+nabob-executor-types = { workspace = true }
+nabob-infallible = { workspace = true }
+nabob-logger = { workspace = true }
+nabob-short-hex-str = { workspace = true }
+nabob-types = { workspace = true }
+bcs = { workspace = true }
+derivative = { workspace = true }
+fail = { workspace = true }
+futures = { workspace = true }
+itertools = { workspace = true }
+mini-moka = { workspace = true }
+mirai-annotations = { workspace = true }
+once_cell = { workspace = true }
+proptest = { workspace = true, optional = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+nabob-types = { workspace = true, features = ["fuzzing"] }
+proptest = { workspace = true }
+serde_json = { workspace = true }
+
+[features]
+default = []
+failpoints = ["fail/failpoints"]
+fuzzing = ["proptest", "nabob-types/fuzzing", "nabob-crypto/fuzzing"]

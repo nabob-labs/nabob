@@ -1,0 +1,28 @@
+[package]
+name = "nabob-openapi-spec-generator"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+version.workspace = true
+rust-version.workspace = true
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+nabob-api = { workspace = true }
+nabob-config = { workspace = true }
+nabob-mempool = { workspace = true, features = ["fuzzing"] }
+nabob-storage-interface = { workspace = true }
+nabob-types = { workspace = true }
+clap = { workspace = true }
