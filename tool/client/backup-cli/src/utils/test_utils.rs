@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use nabob_backup_service::start_backup_service;
+use nabob_backup_svc::start_backup_service;
 use nabob_config::utils::get_available_port;
 use nabob_db::{db::test_helper::arb_blocks_to_commit, NabobDB};
 use nabob_proptest_helpers::ValueGenerator;

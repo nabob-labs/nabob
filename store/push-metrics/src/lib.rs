@@ -143,7 +143,7 @@ impl MetricsPusher {
             &env::var("DASHBOARD_BASE_URL")
                 .unwrap_or_else(|_| DEFAULT_DASHBOARD_BASE_URL.to_string()),
         )
-            .unwrap();
+        .unwrap();
         url.query_pairs_mut()
             .append_pair("from", &start_time)
             .append_pair("to", &end_time)

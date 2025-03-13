@@ -129,9 +129,9 @@ impl NabobDebugger {
         }
 
         let env = NabobEnvironment::new(&state_view);
-        let vm = NabobVM::new(env.clone(), &state_view);
+        let vm = NabobVM::new(&env, &state_view);
         let resolver = state_view.as_move_resolver();
-        let code_storage = state_view.as_nabob_code_storage(env);
+        let code_storage = state_view.as_nabob_code_storage(&env);
 
         let (status, output, gas_profiler) = vm.execute_user_transaction_with_modified_gas_meter(
             &resolver,

@@ -43,6 +43,7 @@ pin-project = { workspace = true }
 proptest = { workspace = true, optional = true }
 proptest-derive = { workspace = true, optional = true }
 rand = { workspace = true, features = ["small_rng"] }
+# Note: we cannot rely on the workspace version of rand. So we use this workaround.
 rand_latest = { package = "rand", version = "0.8.5" }
 serde = { workspace = true }
 serde_bytes = { workspace = true }

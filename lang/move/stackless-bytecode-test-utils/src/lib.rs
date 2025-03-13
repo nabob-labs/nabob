@@ -78,7 +78,7 @@ pub fn test_runner(
                 targets: &targets,
                 processor,
             }
-                .to_string();
+            .to_string();
         }
         // add Warning and Error diagnostics to output
         let mut error_writer = Buffer::no_color();

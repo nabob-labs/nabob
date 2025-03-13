@@ -211,12 +211,12 @@ pub fn start_admin_service(node_config: &NodeConfig) -> AdminService {
 /// Spawns a new thread for the node inspection service
 pub fn start_node_inspection_service(
     node_config: &NodeConfig,
-    nabob_data_cli: NabobDataClient,
+    nabob_data_client: NabobDataClient,
     peers_and_metadata: Arc<PeersAndMetadata>,
 ) {
     nabob_inspection_svc::start_inspection_service(
         node_config.clone(),
-        nabob_data_cli,
+        nabob_data_client,
         peers_and_metadata,
     )
 }

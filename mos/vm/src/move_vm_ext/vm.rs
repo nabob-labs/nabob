@@ -1,7 +1,7 @@
 // Copyright © Nabob Labs
 // SPDX-License-Identifier: Apache-2.0
 
-use crate::move_vm_ext::{warm_vm_cache::WarmVmCache, NabobMoveResolver, SessionExt, SessionId};
+use crate::move_vm_ext::{NabobMoveResolver, SessionExt, SessionId};
 use nabob_crypto::HashValue;
 use nabob_gas_schedule::{MiscGasParameters, NativeGasParameters, LATEST_GAS_FEATURE_VERSION};
 use nabob_native_interface::SafeNativeBuilder;
@@ -16,7 +16,7 @@ use nabob_vm_environment::{
     prod_configs::{nabob_default_ty_builder, nabob_prod_vm_config},
 };
 use nabob_vm_types::storage::change_set_configs::ChangeSetConfigs;
-use move_vm_runtime::{move_vm::MoveVM, RuntimeEnvironment, WithRuntimeEnvironment};
+use move_vm_runtime::{config::VMConfig, move_vm::MoveVM, RuntimeEnvironment};
 use std::ops::Deref;
 
 /// Used by genesis to create runtime environment and VM ([GenesisMoveVM]), encapsulating all
@@ -63,9 +63,10 @@ impl GenesisRuntimeBuilder {
     /// Returns MoveVM for the genesis.
     pub fn build_genesis_vm(&self) -> GenesisMoveVM {
         GenesisMoveVM {
-            vm: MoveVM::new_with_runtime_environment(&self.runtime_environment),
+            vm: MoveVM::new(),
             chain_id: self.chain_id,
             features: self.features.clone(),
+            vm_config: self.runtime_environment.vm_config().clone(),
         }
     }
 }
@@ -77,6 +78,7 @@ pub struct GenesisMoveVM {
     vm: MoveVM,
     chain_id: ChainId,
     features: Features,
+    vm_config: VMConfig,
 }
 
 impl GenesisMoveVM {
@@ -92,6 +94,7 @@ impl GenesisMoveVM {
             &self.vm,
             self.chain_id,
             &self.features,
+            &self.vm_config,
             None,
             resolver,
         )
@@ -115,15 +118,12 @@ pub struct MoveVmExt {
 }
 
 impl MoveVmExt {
-    pub fn new(env: NabobEnvironment, resolver: &impl NabobMoveResolver) -> Self {
-        let vm = if env.features().is_loader_v2_enabled() {
-            MoveVM::new_with_runtime_environment(env.runtime_environment())
-        } else {
-            WarmVmCache::get_warm_vm(&env, resolver)
-                .expect("should be able to create Move VM; check if there are duplicated natives")
-        };
-
-        Self { inner: vm, env }
+    pub fn new(env: &NabobEnvironment) -> Self {
+        let vm = MoveVM::new();
+        Self {
+            inner: vm,
+            env: env.clone(),
+        }
     }
 
     pub fn new_session<'r, R: NabobMoveResolver>(
@@ -137,6 +137,7 @@ impl MoveVmExt {
             &self.inner,
             self.env.chain_id(),
             self.env.features(),
+            self.env.vm_config(),
             maybe_user_transaction_context,
             resolver,
         )

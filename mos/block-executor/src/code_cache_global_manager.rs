@@ -19,7 +19,7 @@ use nabob_types::{
 };
 use nabob_vm_environment::environment::NabobEnvironment;
 use nabob_vm_logging::alert;
-use nabob_vm_types::module_and_script_storage::{NabobCodeStorageAdapter, AsNabobCodeStorage};
+use nabob_vm_types::module_and_script_storage::AsNabobCodeStorage;
 use move_binary_format::{
     errors::{Location, VMError},
     CompiledModule,
@@ -198,13 +198,8 @@ impl NabobModuleCacheManager {
         // To avoid cold starts, fetch the framework code. This ensures the state with 0 modules
         // cached is not possible for block execution (as long as the config enables the framework
         // prefetch).
-        let environment = guard.environment();
-        if environment.features().is_loader_v2_enabled()
-            && guard.module_cache().num_modules() == 0
-            && config.prefetch_framework_code
-        {
-            let code_storage = state_view.as_nabob_code_storage(environment.clone());
-            prefetch_nabob_framework(code_storage, guard.module_cache_mut()).map_err(|err| {
+        if guard.module_cache().num_modules() == 0 && config.prefetch_framework_code {
+            prefetch_nabob_framework(state_view, &mut guard).map_err(|err| {
                 alert_or_println!("Failed to load Nabob framework to module cache: {:?}", err);
                 VMError::from(err).into_vm_status()
             })?;
@@ -271,8 +266,15 @@ impl<'a> NabobModuleCacheManagerGuard<'a> {
     #[cfg(test)]
     pub(crate) fn none() -> Self {
         use nabob_types::state_store::MockStateView;
+        Self::none_for_state_view(&MockStateView::empty())
+    }
+
+    /// A guard in [NabobModuleCacheManagerGuard::None] state with empty module cache and the
+    /// environment initialized based on the provided state. Use for testing only.
+    #[cfg(test)]
+    pub(crate) fn none_for_state_view(state_view: &impl StateView) -> Self {
         NabobModuleCacheManagerGuard::None {
-            environment: NabobEnvironment::new(&MockStateView::empty()),
+            environment: NabobEnvironment::new(state_view),
             module_cache: GlobalModuleCache::empty(),
         }
     }
@@ -281,10 +283,12 @@ impl<'a> NabobModuleCacheManagerGuard<'a> {
 /// If Nabob framework exists, loads "transaction_validation.move" and all its transitive
 /// dependencies from storage into provided module cache. If loading fails for any reason, a panic
 /// error is returned.
-fn prefetch_nabob_framework<S: StateView>(
-    code_storage: NabobCodeStorageAdapter<S, NabobEnvironment>,
-    module_cache: &mut GlobalModuleCache<ModuleId, CompiledModule, Module, NabobModuleExtension>,
+fn prefetch_nabob_framework(
+    state_view: &impl StateView,
+    guard: &mut NabobModuleCacheManagerGuard,
 ) -> Result<(), PanicError> {
+    let code_storage = state_view.as_nabob_code_storage(guard.environment());
+
     // If framework code exists in storage, the transitive closure will be verified and cached.
     let maybe_loaded = code_storage
         .fetch_verified_module(&AccountAddress::ONE, ident_str!("transaction_validation"))
@@ -298,7 +302,9 @@ fn prefetch_nabob_framework<S: StateView>(
         // Framework must have been loaded. Drain verified modules from local cache into
         // global cache.
         let verified_module_code_iter = code_storage.into_verified_module_code_iter()?;
-        module_cache.insert_verified(verified_module_code_iter)?;
+        guard
+            .module_cache_mut()
+            .insert_verified(verified_module_code_iter)?;
     }
     Ok(())
 }
@@ -306,7 +312,7 @@ fn prefetch_nabob_framework<S: StateView>(
 #[cfg(test)]
 mod test {
     use super::*;
-    use nabob_language_e2e_tests::{data_store::FakeDataStore, executor::FakeExecutor};
+    use nabob_language_e2e_tests::executor::FakeExecutor;
     use nabob_types::{
         on_chain_config::{FeatureFlag, Features, OnChainConfig},
         state_store::{state_key::StateKey, state_value::StateValue, MockStateView},
@@ -327,31 +333,24 @@ mod test {
         let executor = FakeExecutor::from_head_genesis();
         let state_view = executor.get_state_view();
 
-        let environment = NabobEnvironment::new_with_delayed_field_optimization_enabled(state_view);
-        let code_storage = state_view.as_nabob_code_storage(environment);
+        let mut guard = NabobModuleCacheManagerGuard::none_for_state_view(state_view);
+        assert_eq!(guard.module_cache().num_modules(), 0);
 
-        let mut module_cache = GlobalModuleCache::empty();
-        assert_eq!(module_cache.num_modules(), 0);
-
-        let result = prefetch_nabob_framework(code_storage, &mut module_cache);
+        let result = prefetch_nabob_framework(state_view, &mut guard);
         assert!(result.is_ok());
-        assert!(module_cache.num_modules() > 0);
+        assert!(guard.module_cache().num_modules() > 0);
     }
 
     #[test]
     fn test_prefetch_non_existing_nabob_framework() {
-        let state_view = FakeDataStore::default();
+        let state_view = MockStateView::empty();
 
-        let environment =
-            NabobEnvironment::new_with_delayed_field_optimization_enabled(&state_view);
-        let code_storage = state_view.as_nabob_code_storage(environment);
+        let mut guard = NabobModuleCacheManagerGuard::none_for_state_view(&state_view);
+        assert_eq!(guard.module_cache().num_modules(), 0);
 
-        let mut module_cache = GlobalModuleCache::empty();
-        assert_eq!(module_cache.num_modules(), 0);
-
-        let result = prefetch_nabob_framework(code_storage, &mut module_cache);
+        let result = prefetch_nabob_framework(&state_view, &mut guard);
         assert!(result.is_ok());
-        assert_eq!(module_cache.num_modules(), 0);
+        assert_eq!(guard.module_cache().num_modules(), 0);
     }
 
     fn add_struct_identifier<K, D, V, E>(manager: &mut ModuleCacheManager<K, D, V, E>, name: &str)

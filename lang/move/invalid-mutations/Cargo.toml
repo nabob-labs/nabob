@@ -1,5 +1,5 @@
 [package]
-name = "move-invalid-mutations"
+name = "move-bytecode-verifier-invalid-mutations"
 authors.workspace = true
 edition.workspace = true
 homepage.workspace = true

@@ -75,7 +75,7 @@ pub struct DataStream<T> {
     data_stream_id: DataStreamId,
 
     // The data client through which to fetch data from the Nabob network
-    nabob_data_cli: T,
+    nabob_data_client: T,
 
     // The engine for this data stream
     stream_engine: StreamEngine,
@@ -132,7 +132,7 @@ impl<T: NabobDataClientInterface + Send + Clone + 'static> DataStream<T> {
         data_stream_id: DataStreamId,
         stream_request: &StreamRequest,
         stream_update_notifier: nabob_channel::Sender<(), StreamUpdateNotification>,
-        nabob_data_cli: T,
+        nabob_data_client: T,
         notification_id_generator: Arc<U64IdGenerator>,
         advertised_data: &AdvertisedData,
         time_service: TimeService,
@@ -154,7 +154,7 @@ impl<T: NabobDataClientInterface + Send + Clone + 'static> DataStream<T> {
             data_client_config,
             streaming_service_config: data_stream_config,
             data_stream_id,
-            nabob_data_cli,
+            nabob_data_client,
             stream_engine,
             stream_update_notifier,
             sent_data_requests: None,
@@ -382,7 +382,7 @@ impl<T: NabobDataClientInterface + Send + Clone + 'static> DataStream<T> {
         let join_handle = spawn_request_task(
             self.data_stream_id,
             data_client_request,
-            self.nabob_data_cli.clone(),
+            self.nabob_data_client.clone(),
             pending_client_response.clone(),
             request_timeout_ms,
             self.stream_update_notifier.clone(),
@@ -1401,7 +1401,7 @@ fn extract_response_error(
 fn spawn_request_task<T: NabobDataClientInterface + Send + Clone + 'static>(
     data_stream_id: DataStreamId,
     data_client_request: DataClientRequest,
-    nabob_data_cli: T,
+    nabob_data_client: T,
     pending_response: PendingClientResponse,
     request_timeout_ms: u64,
     stream_update_notifier: nabob_channel::Sender<(), StreamUpdateNotification>,
@@ -1423,15 +1423,15 @@ fn spawn_request_task<T: NabobDataClientInterface + Send + Clone + 'static>(
         // Fetch the client response
         let client_response = match data_client_request {
             DataClientRequest::EpochEndingLedgerInfos(request) => {
-                get_epoch_ending_ledger_infos(nabob_data_cli, request, request_timeout_ms).await
+                get_epoch_ending_ledger_infos(nabob_data_client, request, request_timeout_ms).await
             },
             DataClientRequest::NewTransactionsWithProof(request) => {
-                get_new_transactions_with_proof(nabob_data_cli, request, request_timeout_ms)
+                get_new_transactions_with_proof(nabob_data_client, request, request_timeout_ms)
                     .await
             },
             DataClientRequest::NewTransactionOutputsWithProof(request) => {
                 get_new_transaction_outputs_with_proof(
-                    nabob_data_cli,
+                    nabob_data_client,
                     request,
                     request_timeout_ms,
                 )
@@ -1439,25 +1439,25 @@ fn spawn_request_task<T: NabobDataClientInterface + Send + Clone + 'static>(
             },
             DataClientRequest::NewTransactionsOrOutputsWithProof(request) => {
                 get_new_transactions_or_outputs_with_proof(
-                    nabob_data_cli,
+                    nabob_data_client,
                     request,
                     request_timeout_ms,
                 )
                 .await
             },
             DataClientRequest::NumberOfStates(request) => {
-                get_number_of_states(nabob_data_cli, request, request_timeout_ms).await
+                get_number_of_states(nabob_data_client, request, request_timeout_ms).await
             },
             DataClientRequest::StateValuesWithProof(request) => {
-                get_states_values_with_proof(nabob_data_cli, request, request_timeout_ms).await
+                get_states_values_with_proof(nabob_data_client, request, request_timeout_ms).await
             },
             DataClientRequest::SubscribeTransactionsWithProof(request) => {
-                subscribe_to_transactions_with_proof(nabob_data_cli, request, request_timeout_ms)
+                subscribe_to_transactions_with_proof(nabob_data_client, request, request_timeout_ms)
                     .await
             },
             DataClientRequest::SubscribeTransactionOutputsWithProof(request) => {
                 subscribe_to_transaction_outputs_with_proof(
-                    nabob_data_cli,
+                    nabob_data_client,
                     request,
                     request_timeout_ms,
                 )
@@ -1465,22 +1465,22 @@ fn spawn_request_task<T: NabobDataClientInterface + Send + Clone + 'static>(
             },
             DataClientRequest::SubscribeTransactionsOrOutputsWithProof(request) => {
                 subscribe_to_transactions_or_outputs_with_proof(
-                    nabob_data_cli,
+                    nabob_data_client,
                     request,
                     request_timeout_ms,
                 )
                 .await
             },
             DataClientRequest::TransactionOutputsWithProof(request) => {
-                get_transaction_outputs_with_proof(nabob_data_cli, request, request_timeout_ms)
+                get_transaction_outputs_with_proof(nabob_data_client, request, request_timeout_ms)
                     .await
             },
             DataClientRequest::TransactionsWithProof(request) => {
-                get_transactions_with_proof(nabob_data_cli, request, request_timeout_ms).await
+                get_transactions_with_proof(nabob_data_client, request, request_timeout_ms).await
             },
             DataClientRequest::TransactionsOrOutputsWithProof(request) => {
                 get_transactions_or_outputs_with_proof(
-                    nabob_data_cli,
+                    nabob_data_client,
                     request,
                     request_timeout_ms,
                 )
@@ -1511,11 +1511,11 @@ fn spawn_request_task<T: NabobDataClientInterface + Send + Clone + 'static>(
 }
 
 async fn get_states_values_with_proof<T: NabobDataClientInterface + Send + Clone + 'static>(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: StateValuesWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_state_values_with_proof(
+    let client_response = nabob_data_client.get_state_values_with_proof(
         request.version,
         request.start_index,
         request.end_index,
@@ -1527,11 +1527,11 @@ async fn get_states_values_with_proof<T: NabobDataClientInterface + Send + Clone
 }
 
 async fn get_epoch_ending_ledger_infos<T: NabobDataClientInterface + Send + Clone + 'static>(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: EpochEndingLedgerInfosRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_epoch_ending_ledger_infos(
+    let client_response = nabob_data_client.get_epoch_ending_ledger_infos(
         request.start_epoch,
         request.end_epoch,
         request_timeout_ms,
@@ -1544,11 +1544,11 @@ async fn get_epoch_ending_ledger_infos<T: NabobDataClientInterface + Send + Clon
 async fn get_new_transaction_outputs_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: NewTransactionOutputsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_new_transaction_outputs_with_proof(
+    let client_response = nabob_data_client.get_new_transaction_outputs_with_proof(
         request.known_version,
         request.known_epoch,
         request_timeout_ms,
@@ -1559,11 +1559,11 @@ async fn get_new_transaction_outputs_with_proof<
 }
 
 async fn get_new_transactions_with_proof<T: NabobDataClientInterface + Send + Clone + 'static>(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: NewTransactionsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_new_transactions_with_proof(
+    let client_response = nabob_data_client.get_new_transactions_with_proof(
         request.known_version,
         request.known_epoch,
         request.include_events,
@@ -1577,11 +1577,11 @@ async fn get_new_transactions_with_proof<T: NabobDataClientInterface + Send + Cl
 async fn get_new_transactions_or_outputs_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: NewTransactionsOrOutputsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_new_transactions_or_outputs_with_proof(
+    let client_response = nabob_data_client.get_new_transactions_or_outputs_with_proof(
         request.known_version,
         request.known_epoch,
         request.include_events,
@@ -1592,12 +1592,12 @@ async fn get_new_transactions_or_outputs_with_proof<
 }
 
 async fn get_number_of_states<T: NabobDataClientInterface + Send + Clone + 'static>(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: NumberOfStatesRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
     let client_response =
-        nabob_data_cli.get_number_of_states(request.version, request_timeout_ms);
+        nabob_data_client.get_number_of_states(request.version, request_timeout_ms);
     client_response
         .await
         .map(|response| response.map(ResponsePayload::from))
@@ -1606,11 +1606,11 @@ async fn get_number_of_states<T: NabobDataClientInterface + Send + Clone + 'stat
 async fn get_transaction_outputs_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: TransactionOutputsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_transaction_outputs_with_proof(
+    let client_response = nabob_data_client.get_transaction_outputs_with_proof(
         request.proof_version,
         request.start_version,
         request.end_version,
@@ -1622,11 +1622,11 @@ async fn get_transaction_outputs_with_proof<
 }
 
 async fn get_transactions_with_proof<T: NabobDataClientInterface + Send + Clone + 'static>(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: TransactionsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_transactions_with_proof(
+    let client_response = nabob_data_client.get_transactions_with_proof(
         request.proof_version,
         request.start_version,
         request.end_version,
@@ -1641,11 +1641,11 @@ async fn get_transactions_with_proof<T: NabobDataClientInterface + Send + Clone 
 async fn get_transactions_or_outputs_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: TransactionsOrOutputsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
-    let client_response = nabob_data_cli.get_transactions_or_outputs_with_proof(
+    let client_response = nabob_data_client.get_transactions_or_outputs_with_proof(
         request.proof_version,
         request.start_version,
         request.end_version,
@@ -1659,7 +1659,7 @@ async fn get_transactions_or_outputs_with_proof<
 async fn subscribe_to_transactions_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: SubscribeTransactionsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
@@ -1669,7 +1669,7 @@ async fn subscribe_to_transactions_with_proof<
         subscription_stream_id: request.subscription_stream_id,
         subscription_stream_index: request.subscription_stream_index,
     };
-    let client_response = nabob_data_cli.subscribe_to_transactions_with_proof(
+    let client_response = nabob_data_client.subscribe_to_transactions_with_proof(
         subscription_request_metadata,
         request.include_events,
         request_timeout_ms,
@@ -1682,7 +1682,7 @@ async fn subscribe_to_transactions_with_proof<
 async fn subscribe_to_transaction_outputs_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: SubscribeTransactionOutputsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
@@ -1692,7 +1692,7 @@ async fn subscribe_to_transaction_outputs_with_proof<
         subscription_stream_id: request.subscription_stream_id,
         subscription_stream_index: request.subscription_stream_index,
     };
-    let client_response = nabob_data_cli.subscribe_to_transaction_outputs_with_proof(
+    let client_response = nabob_data_client.subscribe_to_transaction_outputs_with_proof(
         subscription_request_metadata,
         request_timeout_ms,
     );
@@ -1704,7 +1704,7 @@ async fn subscribe_to_transaction_outputs_with_proof<
 async fn subscribe_to_transactions_or_outputs_with_proof<
     T: NabobDataClientInterface + Send + Clone + 'static,
 >(
-    nabob_data_cli: T,
+    nabob_data_client: T,
     request: SubscribeTransactionsOrOutputsWithProofRequest,
     request_timeout_ms: u64,
 ) -> Result<Response<ResponsePayload>, nabob_data_cli::error::Error> {
@@ -1714,7 +1714,7 @@ async fn subscribe_to_transactions_or_outputs_with_proof<
         subscription_stream_id: request.subscription_stream_id,
         subscription_stream_index: request.subscription_stream_index,
     };
-    let client_response = nabob_data_cli.subscribe_to_transactions_or_outputs_with_proof(
+    let client_response = nabob_data_client.subscribe_to_transactions_or_outputs_with_proof(
         subscription_request_metadata,
         request.include_events,
         request_timeout_ms,
@@ -1739,7 +1739,7 @@ mod test {
 
         // Create a mock data client
         let data_client_config = NabobDataClientConfig::default();
-        let nabob_data_cli =
+        let nabob_data_client =
             MockNabobDataClient::new(data_client_config, true, false, true, true);
 
         // Create a new pending client response
@@ -1759,7 +1759,7 @@ mod test {
         let join_handle = spawn_request_task(
             data_stream_id,
             data_client_request,
-            nabob_data_cli,
+            nabob_data_client,
             pending_client_response.clone(),
             1000,
             stream_update_notifier.clone(),

@@ -83,7 +83,7 @@ pub const MAX_REAL_TRANSACTION_OUTPUT: u64 = MAX_REAL_TRANSACTION;
 /// A simple mock of the Nabob Data Client
 #[derive(Clone, Debug)]
 pub struct MockNabobDataClient {
-    pub nabob_data_cli_config: NabobDataClientConfig,
+    pub nabob_data_client_config: NabobDataClientConfig,
     pub advertised_epoch_ending_ledger_infos: BTreeMap<Epoch, LedgerInfoWithSignatures>,
     pub advertised_synced_ledger_infos: Vec<LedgerInfoWithSignatures>,
     pub data_beyond_highest_advertised: bool, // If true, data exists beyond the highest advertised
@@ -96,7 +96,7 @@ pub struct MockNabobDataClient {
 
 impl MockNabobDataClient {
     pub fn new(
-        nabob_data_cli_config: NabobDataClientConfig,
+        nabob_data_client_config: NabobDataClientConfig,
         data_beyond_highest_advertised: bool,
         limit_chunk_sizes: bool,
         skip_emulate_network_latencies: bool,
@@ -129,7 +129,7 @@ impl MockNabobDataClient {
         let data_request_counter = Arc::new(Mutex::new(HashMap::new()));
 
         Self {
-            nabob_data_cli_config,
+            nabob_data_client_config,
             advertised_epoch_ending_ledger_infos,
             advertised_synced_ledger_infos,
             data_beyond_highest_advertised,
@@ -144,10 +144,10 @@ impl MockNabobDataClient {
     /// Clones the mock data client without timeout verification
     fn clone_without_timeout_verification(&self) -> Self {
         // Clone the mock data client and skip timeout verification
-        let mut nabob_data_cli = self.clone();
-        nabob_data_cli.skip_timeout_verification = true;
+        let mut nabob_data_client = self.clone();
+        nabob_data_client.skip_timeout_verification = true;
 
-        nabob_data_cli
+        nabob_data_client
     }
 
     /// Emulates network latencies by sleeping for 10 -> 50 ms
@@ -212,13 +212,13 @@ impl MockNabobDataClient {
         if !self.skip_timeout_verification {
             // Verify the given timeout for the request
             let expected_timeout = if is_optimistic_fetch_request {
-                self.nabob_data_cli_config.optimistic_fetch_timeout_ms
+                self.nabob_data_client_config.optimistic_fetch_timeout_ms
             } else if is_subscription_request {
-                self.nabob_data_cli_config
+                self.nabob_data_client_config
                     .subscription_response_timeout_ms
             } else {
-                let min_timeout = self.nabob_data_cli_config.response_timeout_ms;
-                let max_timeout = self.nabob_data_cli_config.max_response_timeout_ms;
+                let min_timeout = self.nabob_data_client_config.response_timeout_ms;
+                let max_timeout = self.nabob_data_client_config.max_response_timeout_ms;
 
                 // Check how many times the given request has been made
                 // and update the request counter.
@@ -386,20 +386,20 @@ impl NabobDataClientInterface for MockNabobDataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION_OUTPUT {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let nabob_data_cli = self.clone_without_timeout_verification();
+            let nabob_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_cli)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_client)
                     .await;
 
             // Fetch the new transaction outputs
-            let outputs_with_proof = nabob_data_cli
+            let outputs_with_proof = nabob_data_client
                 .get_transaction_outputs_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
-                    self.nabob_data_cli_config.response_timeout_ms,
+                    self.nabob_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -441,21 +441,21 @@ impl NabobDataClientInterface for MockNabobDataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let nabob_data_cli = self.clone_without_timeout_verification();
+            let nabob_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_cli)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_client)
                     .await;
 
             // Fetch the new transactions
-            let transactions_with_proof = nabob_data_cli
+            let transactions_with_proof = nabob_data_client
                 .get_transactions_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
                     include_events,
-                    self.nabob_data_cli_config.response_timeout_ms,
+                    self.nabob_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -496,11 +496,11 @@ impl NabobDataClientInterface for MockNabobDataClient {
         self.emulate_network_latencies().await;
 
         // Create a mock data client without timeout verification (to handle the internal requests)
-        let nabob_data_cli = self.clone_without_timeout_verification();
+        let nabob_data_client = self.clone_without_timeout_verification();
 
         // Get the new transactions or outputs response
         let response = if return_transactions_instead_of_outputs() {
-            let (transactions, ledger_info) = nabob_data_cli
+            let (transactions, ledger_info) = nabob_data_client
                 .get_new_transactions_with_proof(
                     known_version,
                     known_epoch,
@@ -511,7 +511,7 @@ impl NabobDataClientInterface for MockNabobDataClient {
                 .payload;
             ((Some(transactions), None), ledger_info)
         } else {
-            let (outputs, ledger_info) = nabob_data_cli
+            let (outputs, ledger_info) = nabob_data_client
                 .get_new_transaction_outputs_with_proof(
                     known_version,
                     known_epoch,
@@ -625,11 +625,11 @@ impl NabobDataClientInterface for MockNabobDataClient {
         self.emulate_network_latencies().await;
 
         // Create a mock data client without timeout verification (to handle the internal requests)
-        let nabob_data_cli = self.clone_without_timeout_verification();
+        let nabob_data_client = self.clone_without_timeout_verification();
 
         // Get the transactions or outputs response
         let transactions_or_outputs = if return_transactions_instead_of_outputs() {
-            let transactions_with_proof = nabob_data_cli
+            let transactions_with_proof = nabob_data_client
                 .get_transactions_with_proof(
                     proof_version,
                     start_version,
@@ -640,7 +640,7 @@ impl NabobDataClientInterface for MockNabobDataClient {
                 .await?;
             (Some(transactions_with_proof.payload), None)
         } else {
-            let outputs_with_proof = nabob_data_cli
+            let outputs_with_proof = nabob_data_client
                 .get_transaction_outputs_with_proof(
                     proof_version,
                     start_version,
@@ -690,21 +690,21 @@ impl NabobDataClientInterface for MockNabobDataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION_OUTPUT {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let nabob_data_cli = self.clone_without_timeout_verification();
+            let nabob_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let known_epoch = self.find_known_epoch_for_version(known_version);
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_cli)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_client)
                     .await;
 
             // Fetch the new transaction outputs
-            let outputs_with_proof = nabob_data_cli
+            let outputs_with_proof = nabob_data_client
                 .get_transaction_outputs_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
-                    self.nabob_data_cli_config.response_timeout_ms,
+                    self.nabob_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -757,22 +757,22 @@ impl NabobDataClientInterface for MockNabobDataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION_OUTPUT {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let nabob_data_cli = self.clone_without_timeout_verification();
+            let nabob_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let known_epoch = self.find_known_epoch_for_version(known_version);
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_cli)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &nabob_data_client)
                     .await;
 
             // Fetch the new transaction outputs
-            let outputs_with_proof = nabob_data_cli
+            let outputs_with_proof = nabob_data_client
                 .get_transactions_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
                     include_events,
-                    self.nabob_data_cli_config.response_timeout_ms,
+                    self.nabob_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -822,11 +822,11 @@ impl NabobDataClientInterface for MockNabobDataClient {
         self.emulate_network_latencies().await;
 
         // Create a mock data client without timeout verification (to handle the internal requests)
-        let nabob_data_cli = self.clone_without_timeout_verification();
+        let nabob_data_client = self.clone_without_timeout_verification();
 
         // Send the new transactions or outputs response
         let response = if return_transactions_instead_of_outputs() {
-            let (transactions, ledger_info) = nabob_data_cli
+            let (transactions, ledger_info) = nabob_data_client
                 .subscribe_to_transactions_with_proof(
                     subscription_request_metadata,
                     include_events,
@@ -836,7 +836,7 @@ impl NabobDataClientInterface for MockNabobDataClient {
                 .payload;
             ((Some(transactions), None), ledger_info)
         } else {
-            let (outputs, ledger_info) = nabob_data_cli
+            let (outputs, ledger_info) = nabob_data_client
                 .subscribe_to_transaction_outputs_with_proof(
                     subscription_request_metadata,
                     request_timeout_ms,
@@ -1022,11 +1022,11 @@ fn create_range_random_u64(min_value: u64, max_value: u64) -> u64 {
 async fn determine_target_ledger_info(
     known_epoch: Epoch,
     request_timeout_ms: u64,
-    nabob_data_cli: &MockNabobDataClient,
+    nabob_data_client: &MockNabobDataClient,
 ) -> LedgerInfoWithSignatures {
     if known_epoch <= MAX_REAL_EPOCH_END {
         // Fetch the epoch ending ledger info
-        nabob_data_cli
+        nabob_data_client
             .get_epoch_ending_ledger_infos(known_epoch, known_epoch, request_timeout_ms)
             .await
             .unwrap()

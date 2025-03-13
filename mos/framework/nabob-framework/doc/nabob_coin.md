@@ -244,6 +244,7 @@ Can only called during genesis to initialize the Nabob coin.
 
 
 <pre><code><b>public</b> <b>fun</b> <a href="nabob_coin.md#0x1_nabob_coin_has_mint_capability">has_mint_capability</a>(<a href="account.md#0x1_account">account</a>: &<a href="../../move-stdlib/doc/signer.md#0x1_signer">signer</a>): bool {
+    // TODO: [<a href="../../move-stdlib/doc/signer.md#0x1_signer_address_of">signer::address_of</a>] Is permissioned <a href="../../move-stdlib/doc/signer.md#0x1_signer">signer</a> allowed?
     <b>exists</b>&lt;<a href="nabob_coin.md#0x1_nabob_coin_MintCapStore">MintCapStore</a>&gt;(<a href="../../move-stdlib/doc/signer.md#0x1_signer_address_of">signer::address_of</a>(<a href="account.md#0x1_account">account</a>))
 }
 </code></pre>
@@ -343,6 +344,7 @@ Create new coins and deposit them into dst_addr's account.
     dst_addr: <b>address</b>,
     amount: u64,
 ) <b>acquires</b> <a href="nabob_coin.md#0x1_nabob_coin_MintCapStore">MintCapStore</a> {
+    // TODO: Can this function be invoked by permissioned <a href="../../move-stdlib/doc/signer.md#0x1_signer">signer</a>?
     <b>let</b> account_addr = <a href="../../move-stdlib/doc/signer.md#0x1_signer_address_of">signer::address_of</a>(<a href="account.md#0x1_account">account</a>);
 
     <b>assert</b>!(
@@ -491,7 +493,7 @@ Claim the delegated mint capability and destroy the delegated token.
 <td>The BOB coin may only be created exactly once.</td>
 <td>Medium</td>
 <td>The initialization function may only be called once.</td>
-<td>Enforced through the <a href="https://github.com/nabob-labs/nabob-core/blob/main/nabob-move/framework/nabob-framework/sources/coin.move">coin</a> module, which has been audited.</td>
+<td>Enforced through the <a href="https://github.com/nabob-labs/nabob/blob/main/mos/framework/nabob-framework/sources/coin.move">coin</a> module, which has been audited.</td>
 </tr>
 
 <tr>
@@ -499,7 +501,7 @@ Claim the delegated mint capability and destroy the delegated token.
 <td>Any type of operation on the BOB coin should fail if the user has not registered for the coin.</td>
 <td>Medium</td>
 <td>Coin operations may succeed only on valid user coin registration.</td>
-<td>Enforced through the <a href="https://github.com/nabob-labs/nabob-core/blob/main/nabob-move/framework/nabob-framework/sources/coin.move">coin</a> module, which has been audited.</td>
+<td>Enforced through the <a href="https://github.com/nabob-labs/nabob/blob/main/mos/framework/nabob-framework/sources/coin.move">coin</a> module, which has been audited.</td>
 </tr>
 
 </table>

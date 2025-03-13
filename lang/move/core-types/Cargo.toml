@@ -23,6 +23,8 @@ once_cell = { workspace = true }
 primitive-types = { workspace = true, features = ["impl-serde"] }
 proptest = { workspace = true, optional = true }
 proptest-derive = { workspace = true, optional = true }
+# Cannot use workspace version as nabob currently cannot be upgraded
+# to newer rand.
 rand = { version = "0.8.5" }
 ref-cast = { workspace = true }
 serde = { workspace = true }

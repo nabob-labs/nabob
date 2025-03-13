@@ -257,7 +257,7 @@ async fn send_get_request_to_path(config: &NodeConfig, endpoint: &str) -> Respon
     // Create the data client
     let network_client =
         NetworkClient::new(vec![], vec![], HashMap::new(), peers_and_metadata.clone());
-    let (nabob_data_cli, _) = NabobDataClient::new(
+    let (nabob_data_client, _) = NabobDataClient::new(
         NabobDataClientConfig::default(),
         BaseConfig::default(),
         TimeService::mock(),
@@ -274,7 +274,7 @@ async fn send_get_request_to_path(config: &NodeConfig, endpoint: &str) -> Respon
             .body(Body::from(""))
             .unwrap(),
         config.clone(),
-        nabob_data_cli,
+        nabob_data_client,
         peers_and_metadata,
     )
     .await

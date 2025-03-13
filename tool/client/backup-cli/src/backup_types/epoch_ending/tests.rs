@@ -16,7 +16,7 @@ use crate::{
         RocksdbOpt, TrustedWaypointOpt,
     },
 };
-use nabob_backup_service::start_backup_service;
+use nabob_backup_svc::start_backup_service;
 use nabob_config::utils::get_available_port;
 use nabob_db::NabobDB;
 use nabob_storage_interface::DbReader;

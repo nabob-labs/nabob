@@ -7,7 +7,7 @@ The processors in this crate are deprecated. The new processors are in [`sdk-pro
 ### Prerequisite
 
 - A running PostgreSQL instance, with a valid database. More tutorial can be
-  found [here](https://github.com/nabob-labs/nabob/tree/main/crates/indexer#postgres)
+  found [here](https://github.com/nabob-labs/nabob/tree/main/bos/indexer#postgres)
 
   - A config YAML file
       - For example, `parser.yaml`

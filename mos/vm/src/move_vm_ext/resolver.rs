@@ -10,7 +10,7 @@ use nabob_vm_types::resolver::{
 use bytes::Bytes;
 use move_binary_format::errors::PartialVMResult;
 use move_core_types::language_storage::StructTag;
-use move_vm_types::resolver::{ModuleResolver, ResourceResolver};
+use move_vm_types::resolver::ResourceResolver;
 use std::collections::{BTreeMap, HashMap};
 
 /// A general resolver used by NabobVM. Allows to implement custom hooks on
@@ -20,7 +20,6 @@ pub trait NabobMoveResolver:
     AggregatorV1Resolver
     + ConfigStorage
     + DelayedFieldResolver
-    + ModuleResolver
     + ResourceResolver
     + ResourceGroupResolver
     + StateStorageView<Key = StateKey>

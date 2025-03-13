@@ -63,6 +63,7 @@ enum LocalAccountAuthenticator {
     Keyless(KeylessAccount),
     FederatedKeyless(FederatedKeylessAccount),
     Abstraction(AbstractedAccount), // TODO: Add support for keyless authentication
+    DomainAbstraction(DomainAbstractedAccount), // TODO: Add support for keyless authentication
 }
 
 impl LocalAccountAuthenticator {
@@ -85,6 +86,7 @@ impl LocalAccountAuthenticator {
                 )
             },
             LocalAccountAuthenticator::Abstraction(..) => unreachable!(),
+            LocalAccountAuthenticator::DomainAbstraction(..) => unreachable!(),
         }
     }
 
@@ -192,6 +194,27 @@ impl LocalAccount {
         Self {
             address,
             auth: LocalAccountAuthenticator::FederatedKeyless(federated_keyless_account),
+            sequence_number: AtomicU64::new(sequence_number),
+        }
+    }
+
+    pub fn new_domain_aa(
+        function_info: FunctionInfo,
+        account_identity: Vec<u8>,
+        sign_func: Arc<dyn Fn(&[u8]) -> Vec<u8> + Send + Sync>,
+        sequence_number: u64,
+    ) -> Self {
+        Self {
+            address: AuthenticationKey::domain_abstraction_address(
+                bcs::to_bytes(&function_info).unwrap(),
+                &account_identity,
+            )
+            .account_address(),
+            auth: LocalAccountAuthenticator::DomainAbstraction(DomainAbstractedAccount {
+                function_info,
+                account_identity,
+                sign_func,
+            }),
             sequence_number: AtomicU64::new(sequence_number),
         }
     }
@@ -433,6 +456,7 @@ impl LocalAccount {
             LocalAccountAuthenticator::Keyless(_) => todo!(),
             LocalAccountAuthenticator::FederatedKeyless(_) => todo!(),
             LocalAccountAuthenticator::Abstraction(..) => todo!(),
+            LocalAccountAuthenticator::DomainAbstraction(..) => todo!(),
         }
     }
 
@@ -442,6 +466,7 @@ impl LocalAccount {
             LocalAccountAuthenticator::Keyless(_) => todo!(),
             LocalAccountAuthenticator::FederatedKeyless(_) => todo!(),
             LocalAccountAuthenticator::Abstraction(..) => todo!(),
+            LocalAccountAuthenticator::DomainAbstraction(..) => todo!(),
         }
     }
 
@@ -455,6 +480,7 @@ impl LocalAccount {
                 federated_keyless_account.authentication_key()
             },
             LocalAccountAuthenticator::Abstraction(..) => todo!(),
+            LocalAccountAuthenticator::DomainAbstraction(..) => todo!(),
         }
     }
 
@@ -465,6 +491,11 @@ impl LocalAccount {
             LocalAccountAuthenticator::FederatedKeyless(_) => todo!(),
             LocalAccountAuthenticator::Abstraction(aa) => {
                 Auth::Abstraction(aa.function_info.clone(), aa.sign_func.clone())
+            },
+            LocalAccountAuthenticator::DomainAbstraction(aa) => Auth::DomainAbstraction {
+                function_info: aa.function_info.clone(),
+                account_identity: aa.account_identity.clone(),
+                sign_function: aa.sign_func.clone(),
             },
         }
     }
@@ -503,6 +534,7 @@ impl LocalAccount {
             LocalAccountAuthenticator::Keyless(_) => todo!(),
             LocalAccountAuthenticator::FederatedKeyless(_) => todo!(),
             LocalAccountAuthenticator::Abstraction(..) => todo!(),
+            LocalAccountAuthenticator::DomainAbstraction(..) => todo!(),
         }
     }
 
@@ -816,6 +848,22 @@ impl fmt::Debug for AbstractedAccount {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("AbstractedAccount")
             .field("function_info", &self.function_info)
+            .field("sign_func", &"<function pointer>") // Placeholder for the function
+            .finish()
+    }
+}
+
+pub struct DomainAbstractedAccount {
+    function_info: FunctionInfo,
+    account_identity: Vec<u8>,
+    sign_func: Arc<dyn Fn(&[u8]) -> Vec<u8> + Send + Sync>,
+}
+
+impl fmt::Debug for DomainAbstractedAccount {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("DomainAbstractedAccount")
+            .field("function_info", &self.function_info)
+            .field("account_identity", &self.account_identity)
             .field("sign_func", &"<function pointer>") // Placeholder for the function
             .finish()
     }
@@ -1191,7 +1239,7 @@ mod tests {
     #[ignore]
     #[tokio::test]
     async fn test_derive_keyless_account() {
-        let nabob_rest_cli = Client::builder(NabobBaseUrl::Devnet).build();
+        let nabob_rest_client = Client::builder(NabobBaseUrl::Devnet).build();
         // This JWT is taken from https://github.com/nabob-labs/nabob-ts-sdk/blob/f644e61beb70e69dfd489e75287c67b527385135/tests/e2e/api/keyless.test.ts#L11
         // As is the ephemeralKeyPair
         // This ephemeralKeyPair expires December 29, 2024.
@@ -1202,11 +1250,11 @@ mod tests {
         let esk = Ed25519PrivateKey::try_from(sk_bytes.as_slice()).unwrap();
         let ephemeral_key_pair =
             EphemeralKeyPair::new_ed25519(esk, 1735475012, vec![0; 31]).unwrap();
-        let mut account = derive_keyless_account(&nabob_rest_cli, jwt, ephemeral_key_pair, None)
+        let mut account = derive_keyless_account(&nabob_rest_client, jwt, ephemeral_key_pair, None)
             .await
             .unwrap();
         println!("Address: {}", account.address().to_hex_literal());
-        let balance = nabob_rest_cli
+        let balance = nabob_rest_client
             .view_bob_account_balance(account.address())
             .await
             .unwrap()
@@ -1215,7 +1263,7 @@ mod tests {
             println!("Funding account");
             let faucet_client = FaucetClient::new_from_rest_client(
                 Url::from_str("https://faucet.devnet.naboblabs.com").unwrap(),
-                nabob_rest_cli.clone(),
+                nabob_rest_client.clone(),
             );
             faucet_client
                 .fund(account.address(), 10000000)
@@ -1224,13 +1272,13 @@ mod tests {
         }
         println!(
             "Balance: {}",
-            nabob_rest_cli
+            nabob_rest_client
                 .view_bob_account_balance(account.address())
                 .await
                 .unwrap()
                 .into_inner()
         );
-        let coin_client = CoinClient::new(&nabob_rest_cli);
+        let coin_client = CoinClient::new(&nabob_rest_client);
         let signed_txn = coin_client
             .get_signed_transfer_txn(
                 &mut account,
@@ -1246,7 +1294,7 @@ mod tests {
         println!(
             "Sent 1111111 to 0x7968dab936c1bad187c60ce4082f307d030d780e91e694ae03aef16aba73f30"
         );
-        nabob_rest_cli
+        nabob_rest_client
             .submit_without_deserializing_response(&signed_txn)
             .await
             .unwrap();

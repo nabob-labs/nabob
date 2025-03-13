@@ -51,7 +51,7 @@ nabob-cached-packages = { workspace = true }
 nabob-framework = { workspace = true }
 nabob-gas-meter = { workspace = true }
 nabob-gas-schedule = { workspace = true, features = ["testing"] }
-nabob-move-stdlib = { workspace = true }
+move-stdlib = { workspace = true }
 nabob-proptest-helpers = { workspace = true }
 move-package = { workspace = true }
 passkey-types = { workspace = true }

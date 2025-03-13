@@ -1,4 +1,4 @@
-<!-- Copyright © Nabob Labs -->
+<!-- Copyright © Nabob Foundation -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
 <!DOCTYPE html>
@@ -208,10 +208,10 @@
         (No writes to show.)
         {{/if}}
         <h3>Storage</h3>
-        The storage fees cover the extended-term storage of states and events and are assessed at a fixed price in APT.
+        The storage fees cover the extended-term storage of states and events and are assessed at a fixed price in BOB.
 
         <h4>Transaction</h4>
-        {{storage-txn}} APT
+        {{storage-txn}} BOB
         {{#if storage-txn-percentage}}
         , {{storage-txn-percentage}} of the total cost for storage.
         {{/if}}
@@ -220,9 +220,9 @@
         <table>
             <tr>
                 <td><b>Path</b></td>
-                <td style="text-align: right"><b>Cost in APT</b></td>
+                <td style="text-align: right"><b>Cost in BOB</b></td>
                 <td style="text-align: right"><b>Percentage</b></td>
-                <td style="text-align: right"><b>Refund in APT</b></td>
+                <td style="text-align: right"><b>Refund in BOB</b></td>
                 <td style="text-align: right"><b>Percentage</b></td>
             </tr>
             {{#each storage-writes}}
@@ -243,7 +243,7 @@
         <table>
             <tr>
                 <td><b>Name</b></td>
-                <td style="text-align: right"><b>Cost in APT</b></td>
+                <td style="text-align: right"><b>Cost in BOB</b></td>
                 <td style="text-align: right"><b>Percentage</b></td>
             </tr>
             {{#each storage-events}}

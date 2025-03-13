@@ -29,8 +29,8 @@ impl Error {
     pub fn get_label(&self) -> &'static str {
         match self {
             Self::DataIsUnavailable(_) => "data_is_unavailable",
-            Self::NabobDataClientError(_) => "nabob_data_cli_error",
-            Self::NabobDataClientResponseIsInvalid(_) => "nabob_data_cli_response_is_invalid",
+            Self::NabobDataClientError(_) => "nabob_data_client_error",
+            Self::NabobDataClientResponseIsInvalid(_) => "nabob_data_client_response_is_invalid",
             Self::IntegerOverflow(_) => "integer_overflow",
             Self::NoDataToFetch(_) => "no_data_to_fetch",
             Self::UnexpectedErrorEncountered(_) => "unexpected_error_encountered",

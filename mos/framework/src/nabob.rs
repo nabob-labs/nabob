@@ -61,15 +61,15 @@ impl ReleaseTarget {
             ("nabob-stdlib", None),
             (
                 "nabob-framework",
-                Some("cached-packages/src/nabob_framework_sdk_builder"),
+                Some("cached-packages/src/nabob_framework_sdk_builder.rs"),
             ),
             (
                 "nabob-token",
-                Some("cached-packages/src/nabob_token_sdk_builder"),
+                Some("cached-packages/src/nabob_token_sdk_builder.rs"),
             ),
             (
                 "nabob-token-objects",
-                Some("cached-packages/src/nabob_token_objects_sdk_builder"),
+                Some("cached-packages/src/nabob_token_objects_sdk_builder.rs"),
             ),
         ];
         // Currently we don't have experimental packages only included in particular targets.

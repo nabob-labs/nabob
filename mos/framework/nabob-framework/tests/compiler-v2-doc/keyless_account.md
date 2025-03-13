@@ -4,7 +4,7 @@
 # Module `0x1::keyless_account`
 
 This module is responsible for configuring keyless blockchain accounts which were introduced in
-[AIP-61](https://github.com/nabob-labs/AIPs/blob/main/aips/aip-61.md).
+[AIP-61](https://github.com/nabob-foundation/AIPs/blob/main/aips/aip-61.md).
 
 
 -  [Struct `Group`](#0x1_keyless_account_Group)

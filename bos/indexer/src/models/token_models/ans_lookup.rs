@@ -117,7 +117,7 @@ impl CurrentAnsLookup {
                                 );
                                 let subdomain =
                                     inner.subdomain_name.get_string().unwrap_or_default();
-                                let mut token_name = format!("{}.bob", &inner.domain_name);
+                                let mut token_name = format!("{}.apt", &inner.domain_name);
                                 if !subdomain.is_empty() {
                                     token_name = format!("{}.{}", &subdomain, token_name);
                                 }
@@ -140,7 +140,7 @@ impl CurrentAnsLookup {
                                 );
                                 let subdomain =
                                     inner.subdomain_name.get_string().unwrap_or_default();
-                                let mut token_name = format!("{}.bob", &inner.domain_name);
+                                let mut token_name = format!("{}.apt", &inner.domain_name);
                                 if !subdomain.is_empty() {
                                     token_name = format!("{}.{}", &subdomain, token_name);
                                 }

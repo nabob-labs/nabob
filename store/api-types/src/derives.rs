@@ -3,7 +3,7 @@
 
 //! This file is where we apply a number of traits that allow us to use these
 //! traits with Poem. For more information on how these macros work, see the
-//! documentation within `crates/nabob-openapi`.
+//! documentation within `store/openapi`.
 //!
 //! In some cases we use these derives because the underlying types are not
 //! expressible via OpenAPI, e.g. Address. In other cases, we use them because

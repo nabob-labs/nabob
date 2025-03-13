@@ -69,7 +69,7 @@ pub trait ExecutorTask: Sync {
 
     /// Create an instance of the transaction executor.
     fn init(
-        environment: NabobEnvironment,
+        environment: &NabobEnvironment,
         state_view: &impl TStateView<Key = <Self::Txn as Transaction>::Key>,
     ) -> Self;
 

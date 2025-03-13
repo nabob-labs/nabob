@@ -799,6 +799,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "atomic"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8d818003e740b63afc82337e3160717f4f63078720a810b7b903e70a5d1d2994"
+dependencies = [
+ "bytemuck",
+]
+
+[[package]]
 name = "atomic-waker"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1591,7 +1600,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "91d7b79e99bfaa0d47da0687c43aa3b7381938a62ad3a6498599039321f660b7"
 dependencies = [
  "chrono",
- "chrono-tz-build",
+ "chrono-tz-build 0.2.1",
+ "phf",
+]
+
+[[package]]
+name = "chrono-tz"
+version = "0.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9c6ac4f2c0bf0f44e9161aec9675e1050aa4a530663c4a9e37e108fa948bca9f"
+dependencies = [
+ "chrono",
+ "chrono-tz-build 0.4.0",
  "phf",
 ]
 
@@ -1603,6 +1623,16 @@ checksum = "433e39f13c9a060046954e0592a8d0a4bcb1040125cbf91cb8ee58964cfb350f"
 dependencies = [
  "parse-zoneinfo",
  "phf",
+ "phf_codegen",
+]
+
+[[package]]
+name = "chrono-tz-build"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e94fea34d77a245229e7746bd2beb786cd2a896f306ff491fb8cecb3074b10a7"
+dependencies = [
+ "parse-zoneinfo",
  "phf_codegen",
 ]
 
@@ -3269,6 +3299,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "figment"
+version = "0.10.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8cb01cd46b0cf372153850f4c6c272d9cbea2da513e07538405148f95bd789f3"
+dependencies = [
+ "atomic",
+ "pear",
+ "serde",
+ "serde_yaml 0.9.30",
+ "uncased",
+ "version_check",
+]
+
+[[package]]
 name = "file_diff"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4680,6 +4724,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "inlinable_string"
+version = "0.1.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c8fae54786f62fb2918dcfae3d568594e50eb9b5c25bf04371af6fe7516452fb"
+
+[[package]]
 name = "inout"
 version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5591,11 +5641,20 @@ dependencies = [
  "hex-literal",
  "move-binary-format",
  "move-borrow-graph",
+ "move-bytecode-verifier-invalid-mutations",
  "move-core-types",
- "move-invalid-mutations",
  "petgraph 0.6.5",
  "serde",
  "typed-arena",
+]
+
+[[package]]
+name = "move-bytecode-verifier-invalid-mutations"
+version = "0.1.0"
+dependencies = [
+ "move-binary-format",
+ "move-core-types",
+ "proptest",
 ]
 
 [[package]]
@@ -5667,20 +5726,15 @@ dependencies = [
  "bcs 0.1.4",
  "clap 4.5.21",
  "codespan-reporting",
- "datatest-stable",
  "hex",
  "move-binary-format",
- "move-borrow-graph",
  "move-bytecode-source-map",
  "move-bytecode-verifier",
  "move-command-line-common",
  "move-core-types",
- "move-ir-to-bytecode",
  "move-ir-types",
- "move-stdlib",
  "move-symbol-pool",
  "once_cell",
- "pathdiff",
  "petgraph 0.6.5",
  "regex",
  "tempfile",
@@ -5700,6 +5754,7 @@ dependencies = [
  "flexi_logger",
  "im",
  "itertools 0.13.0",
+ "libtest-mimic",
  "log",
  "move-abstract-domain-derive",
  "move-binary-format",
@@ -5818,15 +5873,6 @@ dependencies = [
  "move-model",
  "move-prover",
  "serde",
-]
-
-[[package]]
-name = "move-invalid-mutations"
-version = "0.1.0"
-dependencies = [
- "move-binary-format",
- "move-core-types",
- "proptest",
 ]
 
 [[package]]
@@ -6244,7 +6290,6 @@ dependencies = [
  "parking_lot 0.12.1",
  "proptest",
  "serde",
- "sha3 0.9.1",
  "smallbitvec",
  "triomphe",
  "typed-arena",
@@ -6260,6 +6305,7 @@ dependencies = [
  "move-bytecode-utils",
  "move-core-types",
  "move-table-extension",
+ "move-vm-runtime",
  "move-vm-types",
  "once_cell",
  "serde",
@@ -6505,6 +6551,7 @@ dependencies = [
  "mini-moka",
  "move-core-types",
  "move-package",
+ "move-stdlib",
  "nabob-api-test-context",
  "nabob-api-types",
  "nabob-bcs-utils",
@@ -6519,7 +6566,6 @@ dependencies = [
  "nabob-logger",
  "nabob-mempool",
  "nabob-metrics-core",
- "nabob-move-stdlib",
  "nabob-proptest-helpers",
  "nabob-runtimes",
  "nabob-sdk",
@@ -6717,7 +6763,6 @@ dependencies = [
  "concurrent-queue",
  "criterion",
  "crossbeam",
- "dashmap",
  "derivative",
  "fail",
  "hashbrown 0.14.3",
@@ -7189,6 +7234,7 @@ dependencies = [
  "nabob-temppath",
  "nabob-types",
  "once_cell",
+ "ouroboros",
  "owo-colors",
  "proptest",
  "proptest-derive",
@@ -7813,11 +7859,11 @@ dependencies = [
  "async-trait",
  "backtrace",
  "clap 4.5.21",
+ "figment",
  "nabob-metrics-core",
  "nabob-system-utils",
  "prometheus",
  "serde",
- "serde_yaml 0.8.26",
  "tempfile",
  "tokio",
  "toml",
@@ -8387,7 +8433,7 @@ dependencies = [
 
 [[package]]
 name = "nabob-move-stdlib"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "bcs 0.1.4",
  "dir-diff",
@@ -8650,6 +8696,7 @@ dependencies = [
  "serde_json",
  "serde_yaml 0.8.26",
  "tokio",
+ "ureq",
  "url",
 ]
 
@@ -8697,6 +8744,19 @@ dependencies = [
  "poem-openapi",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "nabob-openapi-spec-generator"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap 4.5.21",
+ "nabob-api",
+ "nabob-config",
+ "nabob-mempool",
+ "nabob-storage-interface",
+ "nabob-types",
 ]
 
 [[package]]
@@ -8899,6 +8959,7 @@ version = "0.1.0"
 dependencies = [
  "bitvec 1.0.1",
  "criterion",
+ "dashmap",
  "itertools 0.13.0",
  "jemallocator",
  "nabob-crypto",
@@ -9097,6 +9158,7 @@ dependencies = [
  "derive_more 0.99.17",
  "itertools 0.13.0",
  "nabob-crypto",
+ "nabob-infallible",
  "nabob-layered-map",
  "nabob-metrics-core",
  "nabob-scratchpad",
@@ -9352,6 +9414,8 @@ dependencies = [
  "base64 0.13.1",
  "bcs 0.1.4",
  "bytes",
+ "chrono",
+ "chrono-tz 0.10.1",
  "ciborium",
  "claims",
  "coset",
@@ -9389,6 +9453,7 @@ dependencies = [
  "quick_cache",
  "rand 0.7.3",
  "rayon",
+ "ref-cast",
  "reqwest",
  "ring 0.16.20",
  "rsa 0.9.6",
@@ -10451,6 +10516,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "pear"
+version = "0.2.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bdeeaa00ce488657faba8ebf44ab9361f9365a97bd39ffb8a60663f57ff4b467"
+dependencies = [
+ "inlinable_string",
+ "pear_codegen",
+ "yansi 1.0.0-rc.1",
+]
+
+[[package]]
+name = "pear_codegen"
+version = "0.2.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4bab5b985dc082b345f812b7df84e1bef27e7207b39e448439ba8bd69c93f147"
+dependencies = [
+ "proc-macro2",
+ "proc-macro2-diagnostics",
+ "quote",
+ "syn 2.0.87",
+]
+
+[[package]]
 name = "pem"
 version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -11168,6 +11256,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f139b0662de085916d1fb67d2b4169d1addddda1919e696f3252b740b629986e"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "proc-macro2-diagnostics"
+version = "0.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "af066a9c399a26e020ada66a034357a868728e72cd426f3adcd35f80d88d88c8"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.87",
+ "version_check",
+ "yansi 1.0.0-rc.1",
 ]
 
 [[package]]
@@ -13347,7 +13448,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "970dff17c11e884a4a09bc76e3a17ef71e01bb13447a11e85226e254fe6d10b8"
 dependencies = [
  "chrono",
- "chrono-tz",
+ "chrono-tz 0.8.5",
  "globwalk",
  "humansize",
  "lazy_static",

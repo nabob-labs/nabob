@@ -20,12 +20,12 @@ pub const PEER_INFO_DISABLED_MESSAGE: &str =
 /// Handles a new peer information request
 pub fn handle_peer_information_request(
     node_config: &NodeConfig,
-    nabob_data_cli: NabobDataClient,
+    nabob_data_client: NabobDataClient,
     peers_and_metadata: Arc<PeersAndMetadata>,
 ) -> (StatusCode, Body, String) {
     // Only return peer information if the endpoint is enabled
     let (status_code, body) = if node_config.inspection_service.expose_peer_information {
-        let peer_information = get_peer_information(nabob_data_cli, peers_and_metadata);
+        let peer_information = get_peer_information(nabob_data_client, peers_and_metadata);
         (StatusCode::OK, Body::from(peer_information))
     } else {
         (
@@ -39,7 +39,7 @@ pub fn handle_peer_information_request(
 
 /// Returns a simple text formatted string with peer and network information
 fn get_peer_information(
-    nabob_data_cli: NabobDataClient,
+    nabob_data_client: NabobDataClient,
     peers_and_metadata: Arc<PeersAndMetadata>,
 ) -> String {
     // Get all registered networks
@@ -84,7 +84,7 @@ fn get_peer_information(
     peer_information_output.push("\n".into());
 
     // Display state sync metadata for each peer
-    display_state_sync_metadata(&mut peer_information_output, &all_peers, nabob_data_cli);
+    display_state_sync_metadata(&mut peer_information_output, &all_peers, nabob_data_client);
     peer_information_output.push("\n".into());
 
     // Display detailed peer metadata for each peer
@@ -206,12 +206,12 @@ fn display_peer_monitoring_metadata(
 fn display_state_sync_metadata(
     peer_information_output: &mut Vec<String>,
     all_peers: &Vec<PeerNetworkId>,
-    nabob_data_cli: NabobDataClient,
+    nabob_data_client: NabobDataClient,
 ) {
     peer_information_output.push("State sync metadata for each peer:".into());
 
     // Fetch and display the priority and regular peers
-    if let Ok((priority_peers, regular_peers)) = nabob_data_cli.get_priority_and_regular_peers()
+    if let Ok((priority_peers, regular_peers)) = nabob_data_client.get_priority_and_regular_peers()
     {
         // Sort the peer lists before displaying them
         let mut priority_peers: Vec<_> = priority_peers.into_iter().collect();
@@ -227,14 +227,14 @@ fn display_state_sync_metadata(
     }
 
     // Fetch and display the global advertised data summary
-    let global_data_summary = nabob_data_cli.get_global_data_summary();
+    let global_data_summary = nabob_data_client.get_global_data_summary();
     peer_information_output.push(format!(
         "\t- Global advertised data summary: {:?}",
         global_data_summary
     ));
 
     // Fetch and display the state sync metadata for each peer
-    let peer_to_state = nabob_data_cli.get_peer_states().get_peer_to_states();
+    let peer_to_state = nabob_data_client.get_peer_states().get_peer_to_states();
     for peer in all_peers {
         if let Some(peer_state_entry) = peer_to_state.get(peer) {
             // Get the peer states

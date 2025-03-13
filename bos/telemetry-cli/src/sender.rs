@@ -579,7 +579,7 @@ mod tests {
         let test_registry = Registry::default();
 
         let counter = register_int_counter_vec_with_registry!(
-            "nabob_telemetry_svc_success",
+            "nabob_telemetry_service_success",
             "Number of telemetry events successfully sent to telemetry service",
             &["event_name"],
             test_registry

@@ -747,7 +747,7 @@ impl Writer for FileWriter {
 /// Converts a record into a string representation:
 /// UNIX_TIMESTAMP LOG_LEVEL [thread_name] FILE:LINE MESSAGE JSON_DATA
 /// Example:
-/// 2020-03-07 05:03:03 INFO [thread_name] common/nabob-logger/src/main:261 Hello { "world": true }
+/// 2020-03-07 05:03:03 INFO [thread_name] common/nabob-logger/src/lib.rs:261 Hello { "world": true }
 fn text_format(entry: &LogEntry) -> Result<String, fmt::Error> {
     use std::fmt::Write;
 
@@ -968,7 +968,7 @@ mod tests {
         line_num += 1;
         let thread_name = thread::current().name().map(|s| s.to_string()).unwrap();
 
-        let expected = format!("{{\"level\":\"INFO\",\"source\":{{\"package\":\"nabob_logger\",\"file\":\"crates/nabob-logger/src/nabob_logger:{line_num}\"}},\"thread_name\":\"{thread_name}\",\"hostname\":\"test-host\",\"timestamp\":\"2022-07-24T23:42:29.540278Z\",\"message\":\"This is a log\",\"data\":{{\"bar\":\"foo_bar\",\"category\":\"name\",\"display\":\"12345\",\"foo\":5,\"test\":true}}}}");
+        let expected = format!("{{\"level\":\"INFO\",\"source\":{{\"package\":\"nabob_logger\",\"file\":\"mos/logger/src/nabob_logger.rs:{line_num}\"}},\"thread_name\":\"{thread_name}\",\"hostname\":\"test-host\",\"timestamp\":\"2022-07-24T23:42:29.540278Z\",\"message\":\"This is a log\",\"data\":{{\"bar\":\"foo_bar\",\"category\":\"name\",\"display\":\"12345\",\"foo\":5,\"test\":true}}}}");
 
         assert_eq!(json_format(&entry).unwrap(), expected);
 

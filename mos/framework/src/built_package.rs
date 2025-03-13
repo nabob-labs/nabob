@@ -16,7 +16,7 @@ use codespan_reporting::{
     term::termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor},
 };
 use itertools::Itertools;
-use move_binary_format::{file_format_common::VERSION_7, CompiledModule};
+use move_binary_format::{file_format_common, file_format_common::VERSION_7, CompiledModule};
 use move_command_line_common::files::MOVE_COMPILED_EXTENSION;
 use move_compiler::{
     compiled_unit::{CompiledUnit, NamedCompiledModule},
@@ -127,7 +127,7 @@ impl Default for BuildOptions {
             compiler_version: None,
             language_version: None,
             skip_attribute_checks: false,
-            check_test_code: false,
+            check_test_code: true,
             known_attributes: extended_checks::get_all_attribute_names().clone(),
             experiments: vec![],
         }
@@ -153,6 +153,14 @@ impl BuildOptions {
     pub fn with_experiment(mut self, exp: &str) -> Self {
         self.experiments.push(exp.to_string());
         self
+    }
+
+    pub fn set_latest_language(self) -> Self {
+        BuildOptions {
+            language_version: Some(LanguageVersion::latest()),
+            bytecode_version: Some(file_format_common::VERSION_MAX),
+            ..self
+        }
     }
 }
 
@@ -300,7 +308,10 @@ impl BuiltPackage {
             }
 
             if let Some(model_options) = model.get_extension::<Options>() {
-                if model_options.experiment_on(Experiment::STOP_AFTER_EXTENDED_CHECKS) {
+                if model_options.experiment_on(Experiment::FAIL_ON_WARNING) && model.has_warnings()
+                {
+                    bail!("found warning(s), and `--fail-on-warning` is set")
+                } else if model_options.experiment_on(Experiment::STOP_AFTER_EXTENDED_CHECKS) {
                     std::process::exit(if model.has_warnings() { 1 } else { 0 })
                 }
             }

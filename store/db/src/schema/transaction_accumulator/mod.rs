@@ -5,7 +5,7 @@
 //! This module defines physical storage schema for the transaction accumulator.
 //!
 //! A hash value is stored on each position.
-//! See `storage/accumulator/main` for details.
+//! See `storage/accumulator/lib.rs` for details.
 //! ```text
 //! |<----------key--------->|<-value->|
 //! | position in post order |   hash  |

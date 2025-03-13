@@ -847,7 +847,7 @@ where
     type Output = MockOutput<K, E>;
     type Txn = MockTransaction<K, E>;
 
-    fn init(_environment: NabobEnvironment, _state_view: &impl TStateView<Key = K>) -> Self {
+    fn init(_environment: &NabobEnvironment, _state_view: &impl TStateView<Key = K>) -> Self {
         Self::new()
     }
 

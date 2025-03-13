@@ -16,7 +16,7 @@ an incarnation number. To support reads and writes by transactions that may
 execute concurrently, parallel execution maintains an in-memory multi-version
 data structure that separately stores for each memory location the latest value
 written per transaction, along with the associated transaction version.
-This data structure is implemented in: '../../mvhashmap/src/main'.
+This data structure is implemented in: '../../mvhashmap/src/lib.rs'.
 When transaction tx reads a memory location, it obtains from the multi-version
 data-structure the value written to this location by the highest transaction
 that appears before tx in the preset serialization order, along with the

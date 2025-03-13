@@ -538,7 +538,7 @@ fn bls12381_sample_aggregate_pk_and_multisig() {
     let mut rng = OsRng;
 
     let num = 5;
-    let message = b"Hello, Boboverse!";
+    let message = b"Hello, Aptoverse!";
 
     let mut pks = vec![];
     let mut agg_pks = vec![];
@@ -571,7 +571,7 @@ fn bls12381_sample_aggregate_pk_and_multisig() {
     }
     println!("];\n");
 
-    println!("// multisigs[i] is a signature on \"Hello, Boboverse!\" under agg_pks[i]");
+    println!("// multisigs[i] is a signature on \"Hello, Aptoverse!\" under agg_pks[i]");
     println!("let multisigs = vector[");
     for multisig in multisigs {
         println!("    x\"{}\",", multisig);
@@ -587,7 +587,7 @@ fn bls12381_sample_aggregate_sigs() {
     let mut rng = OsRng;
 
     let num = 5;
-    let message = b"Hello, Boboverse!";
+    let message = b"Hello, Aptoverse!";
 
     let mut sigs = vec![];
     let mut multisigs = vec![];
@@ -607,7 +607,7 @@ fn bls12381_sample_aggregate_sigs() {
     }
     println!("];\n");
 
-    println!("// multisigs[i] is a signature on \"Hello, Boboverse!\" from signers 1 through i (inclusive)");
+    println!("// multisigs[i] is a signature on \"Hello, Aptoverse!\" from signers 1 through i (inclusive)");
     println!("let multisigs = vector[");
     for multisig in multisigs {
         println!("    AggrOrMultiSignature {{ bytes: x\"{}\" }},", multisig);

@@ -3486,7 +3486,7 @@ fn create_data_stream(
     let advertised_data = create_advertised_data();
 
     // Create an nabob data client mock and notification generator
-    let nabob_data_cli = MockNabobDataClient::new(data_client_config, true, false, true, false);
+    let nabob_data_client = MockNabobDataClient::new(data_client_config, true, false, true, false);
     let notification_generator = Arc::new(U64IdGenerator::new());
 
     // Create the data stream and listener pair
@@ -3497,7 +3497,7 @@ fn create_data_stream(
         create_random_u64(10000),
         &stream_request,
         create_stream_update_notifier(),
-        nabob_data_cli,
+        nabob_data_client,
         notification_generator,
         &advertised_data,
         time_service.clone(),

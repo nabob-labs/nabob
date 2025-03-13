@@ -1,9 +1,0 @@
-[package]
-name = "ResourceGroupsPrimary"
-version = "0.0.0"
-
-[addresses]
-resource_groups_primary = "_"
-
-[dependencies]
-NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }

@@ -33,7 +33,7 @@ use std::{
     str::FromStr,
 };
 
-/// 1 APT (might not actually get that much, depending on the faucet)
+/// 1 BOB (might not actually get that much, depending on the faucet)
 const NUM_DEFAULT_OCTAS: u64 = 100000000;
 
 /// Tool to initialize current directory for the nabob tool
@@ -379,7 +379,7 @@ impl CliCommand<()> for InitTool {
                 },
                 Network::Testnet => {
                     let mint_site_url = get_mint_site_url(Some(address));
-                    eprintln!("The account has not been created on chain yet. To create the account and get APT on testnet you must visit {}", mint_site_url);
+                    eprintln!("The account has not been created on chain yet. To create the account and get BOB on testnet you must visit {}", mint_site_url);
                     // We don't use `prompt_yes_with_override` here because we only want to
                     // automatically open the minting site if they're in an interactive setting.
                     if !self.prompt_options.assume_yes {

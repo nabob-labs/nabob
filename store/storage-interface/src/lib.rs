@@ -2,6 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
+use crate::state_store::state_view::hot_state_view::HotStateView;
 use nabob_crypto::HashValue;
 pub use nabob_types::indexer::indexer_db_reader::Order;
 use nabob_types::{
@@ -380,7 +381,7 @@ pub trait DbReader: Send + Sync {
         /// Used by the Db-bootstrapper.
         fn get_pre_committed_ledger_summary(&self) -> Result<LedgerSummary>;
 
-        fn get_persisted_state(&self) -> Result<State>;
+        fn get_persisted_state(&self) -> Result<(Arc<dyn HotStateView>, State)>;
 
         fn get_persisted_state_summary(&self) -> Result<StateSummary>;
 

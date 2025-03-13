@@ -963,7 +963,7 @@ nabob-types = {{ path = "../nabob-types", version = "{}" }}
             name, version, self.nabob_types_version,
         )?;
         std::fs::create_dir(dir_path.join("src"))?;
-        let source_path = dir_path.join("src/main");
+        let source_path = dir_path.join("src/lib.rs");
         let mut source = std::fs::File::create(source_path)?;
         output(&mut source, abis, /* local_types */ false)?;
         Ok(())

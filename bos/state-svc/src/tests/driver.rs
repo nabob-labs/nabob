@@ -362,7 +362,7 @@ async fn create_driver_for_tests(
 
     // Create the storage service notifier and listener
     let (storage_service_notifier, storage_service_listener) =
-        nabob_storage_notify::new_storage_service_notifier_listener_pair();
+        nabob_storage_service_notifications::new_storage_service_notifier_listener_pair();
 
     // Create the chunk executor
     let chunk_executor = Arc::new(ChunkExecutor::<NabobVMBlockExecutor>::new(db_rw.clone()));
@@ -378,8 +378,8 @@ async fn create_driver_for_tests(
         HashMap::new(),
         PeersAndMetadata::new(&[]),
     ));
-    let (nabob_data_cli, _) = NabobDataClient::new(
-        node_config.state_sync.nabob_data_cli,
+    let (nabob_data_client, _) = NabobDataClient::new(
+        node_config.state_sync.nabob_data_client,
         node_config.base.clone(),
         time_service.clone(),
         db_rw.reader.clone(),
@@ -403,7 +403,7 @@ async fn create_driver_for_tests(
             metadata_storage,
             consensus_listener,
             event_subscription_service,
-            nabob_data_cli,
+            nabob_data_client,
             streaming_service_client,
             time_service.clone(),
         );

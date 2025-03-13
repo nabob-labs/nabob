@@ -13,6 +13,7 @@ rust-version.workspace = true
 anyhow = { workspace = true }
 nabob-crypto = { workspace = true }
 nabob-layered-map = { workspace = true }
+nabob-infallible = { workspace = true }
 nabob-metrics-core = { workspace = true }
 nabob-scratchpad = { workspace = true }
 nabob-secure-net = { workspace = true }

@@ -1,6 +1,0 @@
-[package]
-name = "TwoByTwoTransfer"
-version = "0.0.0"
-
-[dependencies]
-NabobFramework = { git = "https://github.com/nabob-labs/nabob-framework.git", subdir = "nabob-framework", rev = "main" }

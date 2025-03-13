@@ -186,8 +186,8 @@ where
         self.should_leak_memory_for_native = (*module_id.address() == CORE_CODE_ADDRESS
             && module_id.name().as_str() == "table")
             || (self.feature_version() >= 4
-            && *module_id.address() == CORE_CODE_ADDRESS
-            && module_id.name().as_str() == "event");
+                && *module_id.address() == CORE_CODE_ADDRESS
+                && module_id.name().as_str() == "event");
 
         self.base
             .charge_call_generic(module_id, func_name, ty_args, args, num_locals)
@@ -199,7 +199,7 @@ where
         ty_args: impl ExactSizeIterator<Item = impl TypeView> + Clone,
         args: impl ExactSizeIterator<Item = impl ValueView> + Clone,
     ) -> PartialVMResult<()> {
-        // TODO(Gas): https://github.com/nabob-labs/nabob-core/issues/5485
+        // TODO(Gas): https://github.com/nabob-labs/nabob/issues/5485
         if !self.should_leak_memory_for_native {
             self.release_heap_memory(args.clone().fold(AbstractValueSize::zero(), |acc, val| {
                 acc + self
@@ -460,6 +460,11 @@ where
         }));
 
         self.base.charge_drop_frame(locals)
+    }
+
+    #[inline]
+    fn charge_heap_memory(&mut self, amount: u64) -> PartialVMResult<()> {
+        self.use_heap_memory(amount.into())
     }
 }
 

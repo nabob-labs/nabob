@@ -14,7 +14,7 @@ nabob-block-executor = { workspace = true }
 nabob-block-partitioner = { workspace = true }
 nabob-config = { workspace = true }
 nabob-infallible = { workspace = true }
-#nabob-language-e2e-tests = { workspace = true }
+nabob-language-e2e-tests = { workspace = true }
 nabob-logger = { workspace = true }
 nabob-metrics-core = { workspace = true }
 nabob-node-resource-metrics = { workspace = true }

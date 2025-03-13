@@ -49,8 +49,8 @@ async fn test_fetch_real_jwks() {
     let jwks_uri = fetch_jwks_uri_from_openid_config(
         "https://www.facebook.com/.well-known/openid-configuration/",
     )
-        .await
-        .unwrap();
+    .await
+    .unwrap();
     let jwks = fetch_jwks_from_jwks_uri(None, jwks_uri.as_str())
         .await
         .unwrap();

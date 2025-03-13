@@ -62,6 +62,7 @@ nabob-schemadb = { workspace = true, features = ["fuzzing"] }
 nabob-scratchpad = { workspace = true, features = ["fuzzing"] }
 nabob-temppath = { workspace = true }
 nabob-types = { workspace = true }
+ouroboros = { workspace = true }
 proptest = { workspace = true }
 proptest-derive = { workspace = true }
 rand = { workspace = true }

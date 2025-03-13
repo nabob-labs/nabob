@@ -9,6 +9,8 @@ repository.workspace = true
 version.workspace = true
 rust-version.workspace = true
 
+# Do NOT add any inter-project dependencies.
+# This is to avoid ever having a circular dependency with the nabob-logger crate.
 [dependencies]
 nabob-infallible = { workspace = true }
 nabob-log-derive = { workspace = true }

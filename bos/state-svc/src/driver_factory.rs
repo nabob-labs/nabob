@@ -55,7 +55,7 @@ impl DriverFactory {
         metadata_storage: MetadataStorage,
         consensus_listener: ConsensusNotificationListener,
         event_subscription_service: EventSubscriptionService,
-        nabob_data_cli: NabobDataClient,
+        nabob_data_client: NabobDataClient,
         streaming_service_client: StreamingServiceClient,
         time_service: TimeService,
     ) -> Self {
@@ -70,7 +70,7 @@ impl DriverFactory {
             metadata_storage,
             consensus_listener,
             event_subscription_service,
-            nabob_data_cli,
+            nabob_data_client,
             streaming_service_client,
             time_service,
         );
@@ -96,7 +96,7 @@ impl DriverFactory {
         metadata_storage: MetadataStorage,
         consensus_listener: ConsensusNotificationListener,
         mut event_subscription_service: EventSubscriptionService,
-        nabob_data_cli: NabobDataClient,
+        nabob_data_client: NabobDataClient,
         streaming_service_client: StreamingServiceClient,
         time_service: TimeService,
     ) -> (Self, UnboundedSender<CommitNotification>) {
@@ -176,7 +176,7 @@ impl DriverFactory {
             metadata_storage,
             storage_service_notification_handler,
             storage_synchronizer,
-            nabob_data_cli,
+            nabob_data_client,
             streaming_service_client,
             storage.reader,
             time_service,
@@ -208,7 +208,7 @@ impl DriverFactory {
 /// Note: it's useful to maintain separate runtimes because the logger
 /// can prepend all logs with the runtime thread name.
 pub struct StateSyncRuntimes {
-    _nabob_data_cli: Runtime,
+    _nabob_data_client: Runtime,
     state_sync: DriverFactory,
     _storage_service: Runtime,
     _streaming_service: Runtime,
@@ -216,13 +216,13 @@ pub struct StateSyncRuntimes {
 
 impl StateSyncRuntimes {
     pub fn new(
-        nabob_data_cli: Runtime,
+        nabob_data_client: Runtime,
         state_sync: DriverFactory,
         storage_service: Runtime,
         streaming_service: Runtime,
     ) -> Self {
         Self {
-            _nabob_data_cli: nabob_data_cli,
+            _nabob_data_client: nabob_data_client,
             state_sync,
             _storage_service: storage_service,
             _streaming_service: streaming_service,

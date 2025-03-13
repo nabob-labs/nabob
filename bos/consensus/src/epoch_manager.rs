@@ -165,7 +165,7 @@ pub struct EpochManager<P: OnChainConfigProvider> {
     // recovery_mode is set to true when the recovery manager is spawned
     recovery_mode: bool,
 
-    nabob_time_svc: nabob_time_svc::TimeService,
+    nabob_time_service: nabob_time_svc::TimeService,
     dag_rpc_tx: Option<nabob_channel::Sender<AccountAddress, IncomingDAGRequest>>,
     dag_shutdown_tx: Option<oneshot::Sender<oneshot::Sender<()>>>,
     dag_config: DagConsensusConfig,
@@ -191,7 +191,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         quorum_store_storage: Arc<dyn QuorumStoreStorage>,
         reconfig_events: ReconfigNotificationListener<P>,
         bounded_executor: BoundedExecutor,
-        nabob_time_svc: nabob_time_svc::TimeService,
+        nabob_time_service: nabob_time_svc::TimeService,
         vtxn_pool: VTxnPoolState,
         rand_storage: Arc<dyn RandStorage<AugmentedData>>,
         consensus_publisher: Option<Arc<ConsensusPublisher>>,
@@ -234,7 +234,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             recovery_mode: false,
             dag_rpc_tx: None,
             dag_shutdown_tx: None,
-            nabob_time_svc,
+            nabob_time_service,
             dag_config,
             payload_manager: Arc::new(DirectMempoolPayloadManager::new()),
             rand_storage,
@@ -914,6 +914,10 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             onchain_consensus_config.max_failed_authors_to_store(),
             self.config
                 .min_max_txns_in_block_after_filtering_from_backpressure,
+            onchain_execution_config
+                .block_executor_onchain_config()
+                .block_gas_limit_type
+                .block_gas_limit(),
             pipeline_backpressure_config,
             chain_health_backoff_config,
             self.quorum_store_enabled,
@@ -1442,7 +1446,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             network_sender_arc.clone(),
             network_sender_arc.clone(),
             network_sender_arc,
-            self.nabob_time_svc.clone(),
+            self.nabob_time_service.clone(),
             payload_manager,
             payload_client,
             self.execution_client

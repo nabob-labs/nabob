@@ -15,13 +15,13 @@
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::arc_with_non_send_sync)]
 #![allow(clippy::get_first)]
-use nabob_types::{
-    account_address::AccountAddress,
-    transaction::{EntryFunction, TransactionPayload},
-};
 use move_core_types::{
     ident_str,
     language_storage::{ModuleId, TypeTag},
+};
+use nabob_types::{
+    account_address::AccountAddress,
+    transaction::{EntryFunction, TransactionPayload},
 };
 
 type Bytes = Vec<u8>;

@@ -1644,9 +1644,9 @@ pub fn create_streaming_client_and_server(
         new_streaming_service_client_listener_pair();
 
     // Create a mock data client
-    let nabob_data_cli_config = NabobDataClientConfig::default();
-    let nabob_data_cli = MockNabobDataClient::new(
-        nabob_data_cli_config,
+    let nabob_data_client_config = NabobDataClientConfig::default();
+    let nabob_data_client = MockNabobDataClient::new(
+        nabob_data_client_config,
         data_beyond_highest_advertised,
         limit_chunk_sizes,
         skip_emulate_network_latencies,
@@ -1664,9 +1664,9 @@ pub fn create_streaming_client_and_server(
 
     // Create the streaming service and connect it to the listener
     let streaming_service = DataStreamingService::new(
-        nabob_data_cli_config,
+        nabob_data_client_config,
         data_streaming_service_config,
-        nabob_data_cli,
+        nabob_data_client,
         streaming_service_listener,
         TimeService::mock(),
     );

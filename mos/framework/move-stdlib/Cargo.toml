@@ -1,14 +1,15 @@
 [package]
 name = "nabob-move-stdlib"
-authors.workspace = true
-edition.workspace = true
-homepage.workspace = true
-license.workspace = true
-publish.workspace = true
-repository.workspace = true
-version.workspace = true
-rust-version.workspace = true
+version = "0.1.1"
+edition = "2021"
+authors = ["Diem Association <opensource@diem.com>"]
+description = "Diem stdlib"
+repository = "https://github.com/diem/diem"
+homepage = "https://diem.com"
+license = "Apache-2.0"
+publish = false
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 nabob-gas-schedule = { workspace = true }
 nabob-native-interface = { workspace = true }

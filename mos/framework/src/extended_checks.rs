@@ -229,7 +229,7 @@ impl<'a> ExtendedChecker<'a> {
     }
 
     /// Note: this should be kept up in sync with `is_valid_txn_arg` in
-    /// nabob-move/nabob-vm/src/verifier/transaction_arg_validation.rs
+    /// mos/vm/src/verifier/transaction_arg_validation.rs
     fn check_transaction_input_type(&self, loc: &Loc, ty: &Type) {
         use Type::*;
         match ty {

@@ -906,7 +906,7 @@ fn create_storage_synchronizer(
 
     // Create the storage service handler
     let (storage_service_notifier, storage_service_listener) =
-        nabob_storage_notify::new_storage_service_notifier_listener_pair();
+        nabob_storage_service_notifications::new_storage_service_notifier_listener_pair();
     let storage_service_notification_handler =
         StorageServiceNotificationHandler::new(storage_service_notifier);
 

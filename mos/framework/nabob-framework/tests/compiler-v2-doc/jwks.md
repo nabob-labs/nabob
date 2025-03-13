@@ -879,7 +879,7 @@ utf8(b"pi22xDdK2fz5gclIbDIGghLDYiRO56eW2GUcboeVlhbAuhuT5mlEYIevkxdPOg5n6qICePZiQ
 )
 ```
 
-See AIP-96 for more details about federated keyless - https://github.com/nabob-labs/AIPs/blob/main/aips/aip-96.md
+See AIP-96 for more details about federated keyless - https://github.com/nabob-foundation/AIPs/blob/main/aips/aip-96.md
 
 NOTE: Currently only RSA keys are supported.
 

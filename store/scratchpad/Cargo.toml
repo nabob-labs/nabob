@@ -18,6 +18,7 @@ nabob-types = { workspace = true }
 nabob-vm = { workspace = true }
 bitvec = { workspace = true }
 criterion = { workspace = true, optional = true }
+dashmap = { workspace = true }
 itertools = { workspace = true }
 once_cell = { workspace = true }
 proptest = { workspace = true, optional = true }
@@ -39,4 +40,6 @@ fuzzing = ["nabob-types/fuzzing", "proptest"]
 bench = ["proptest", "criterion"]
 
 [lib]
+# Allow Criterion benchmarks to take command line arguments
+# https://bheisler.github.io/criterion.rs/book/faq.html#cargo-bench-gives-unrecognized-option-errors-for-valid-command-line-options
 bench = false

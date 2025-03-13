@@ -8,6 +8,7 @@ publish.workspace = true
 repository.workspace = true
 version.workspace = true
 rust-version.workspace = true
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 ambassador = { workspace = true }
@@ -26,7 +27,6 @@ move-vm-types = { workspace = true }
 once_cell = { workspace = true }
 parking_lot = { workspace = true }
 serde = { workspace = true }
-sha3 = { workspace = true }
 triomphe = { workspace = true }
 typed-arena = { workspace = true }
 

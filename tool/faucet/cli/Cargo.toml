@@ -16,3 +16,4 @@ nabob-logger = { workspace = true }
 nabob-sdk = { workspace = true }
 clap = { workspace = true }
 tokio = { workspace = true }
+

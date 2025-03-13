@@ -86,7 +86,7 @@ fn gen_join_field(field: proc_macro2::TokenStream) -> proc_macro2::TokenStream {
 /// struct Unit;
 /// ```
 /// derives a `join` that does nothing and always returns `Unchanged` since `Unit` has no fields.
-pub fn move_abstract_domain_derive(input: TokenStream) -> TokenStream {
+pub fn abstract_domain_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
     // statements for joining fields

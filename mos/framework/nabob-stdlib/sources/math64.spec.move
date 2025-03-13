@@ -27,7 +27,7 @@ spec nabob_std::math64 {
     }
 
     // The specs of `pow`, `floor_log2` and `sqrt` are validated with a smaller domain
-    // in nabob-core/third_party/move/move-prover/tests/sources/functional/math8.move
+    // in nabob/third_party/move/move-prover/tests/sources/functional/math8.move
 
     spec pow(n: u64, e: u64): u64 {
         pragma opaque;

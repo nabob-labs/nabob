@@ -31,7 +31,7 @@ impl ExecutorTask for NabobExecutorTask {
     type Output = NabobTransactionOutput;
     type Txn = SignatureVerifiedTransaction;
 
-    fn init(environment: NabobEnvironment, state_view: &impl StateView) -> Self {
+    fn init(environment: &NabobEnvironment, state_view: &impl StateView) -> Self {
         let vm = NabobVM::new(environment, state_view);
         let id = state_view.id();
         Self { vm, id }

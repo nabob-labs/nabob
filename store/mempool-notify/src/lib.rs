@@ -235,7 +235,7 @@ mod tests {
             Duration::from_secs(5),
             mempool_notifier.notify_new_commit(vec![create_user_transaction()], 0),
         )
-            .await;
+        .await;
 
         // Verify the channel is blocked
         if let Ok(result) = result {

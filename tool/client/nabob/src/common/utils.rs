@@ -600,7 +600,7 @@ pub fn explorer_transaction_link(
 
 /// Strips the private key prefix for a given key string if it is AIP-80 compliant.
 ///
-/// [Read about AIP-80](https://github.com/nabob-labs/AIPs/blob/main/aips/aip-80.md)
+/// [Read about AIP-80](https://github.com/nabob-foundation/AIPs/blob/main/aips/aip-80.md)
 pub fn strip_private_key_prefix(key: &String) -> CliTypedResult<String> {
     let disabled_prefixes = ["secp256k1-priv-"];
     let enabled_prefixes = ["ed25519-priv-"];
@@ -628,7 +628,7 @@ pub fn strip_private_key_prefix(key: &String) -> CliTypedResult<String> {
 
 /// Deserializes an Ed25519 private key with a prefix AIP-80 prefix if present.
 ///
-/// [Read about AIP-80](https://github.com/nabob-labs/AIPs/blob/main/aips/aip-80.md)
+/// [Read about AIP-80](https://github.com/nabob-foundation/AIPs/blob/main/aips/aip-80.md)
 pub fn deserialize_private_key_with_prefix<'de, D>(
     deserializer: D,
 ) -> Result<Option<Ed25519PrivateKey>, D::Error>

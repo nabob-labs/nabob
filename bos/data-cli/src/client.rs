@@ -644,10 +644,10 @@ impl NabobDataClient {
         let mut abort_handles = vec![];
         for peer in peers {
             // Send the request to the peer
-            let nabob_data_cli = self.clone();
+            let nabob_data_client = self.clone();
             let request = request.clone();
             let sent_request = tokio::spawn(async move {
-                nabob_data_cli
+                nabob_data_client
                     .send_request_to_peer_and_decode(peer, request, request_timeout_ms)
                     .await
             });

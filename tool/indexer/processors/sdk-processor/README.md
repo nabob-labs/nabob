@@ -11,7 +11,7 @@ If you want to index a custom contract, we recommend using the [Quickstart Guide
 ### Prerequisite
 
 - A running PostgreSQL instance, with a valid database. More tutorial can be
-  found [here](https://github.com/nabob-labs/nabob/tree/main/crates/indexer#postgres)
+  found [here](https://github.com/nabob-labs/nabob/tree/main/bos/indexer#postgres)
 
 - [diesel-cli](https://diesel.rs/guides/getting-started)
 

@@ -37,7 +37,7 @@ spec nabob_framework::vesting {
     /// Implementation: The end of the vesting cliff is stored under VestingContract.vesting_schedule.start_timestamp_secs.
     /// The vest function always checks that timestamp::now_seconds is greater or equal to the end of the vesting cliff
     /// period.
-    /// Enforcement: Audited the check for the end of vesting cliff: [https://github.com/nabob-labs/nabob-core/blob/main/nabob-move/framework/nabob-framework/sources/vesting.move#L566](vest) module.
+    /// Enforcement: Audited the check for the end of vesting cliff: [https://github.com/nabob-labs/nabob/blob/main/mos/framework/nabob-framework/sources/vesting.move#L566](vest) module.
     ///
     /// No.: 5
     /// Requirement: In order to retrieve the total accumulated rewards that have not been distributed, the accumulated
@@ -86,10 +86,10 @@ spec nabob_framework::vesting {
     /// No.: 10
     /// Requirement: A new vesting contract should not be allowed to have an empty list of shareholders, have a different
     /// amount of shareholders than buy-ins, and provide a withdrawal address which is either reserved or not registered
-    /// for bob.
+    /// for apt.
     /// Criticality: High
     /// Implementation: The create_vesting_contract function ensures that the withdrawal_address is not a reserved
-    /// address, that it is registered for bob, that the list of shareholders is non-empty, and that the amount of
+    /// address, that it is registered for apt, that the list of shareholders is non-empty, and that the amount of
     /// shareholders matches the amount of buy_ins.
     /// Enforcement: Formally verified via [high-level-req-10](create_vesting_contract).
     ///
